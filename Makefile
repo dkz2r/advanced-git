@@ -274,25 +274,21 @@ git-adv-05-merging: git-adv-04-undo
 git-adv-05-merging-exercise-01: git-adv-05-merging
 	cd $(REPO_PATH)
 	git tag git-adv-05-merging-exercise-01
-	git branch finish-guac-recipe
-	git switch finish-guac-recipe
-	printf '%s\n' \
-		"name: Guacamole" \
-		"ingredients:" \
-		"  avocado: 1.35" \
-		"  lime: 0.64" \
-		"  salt: 2" \
-		"instructions: |" \
-		"  1. Cut avocados in half and remove pit." \
-		"  2. Mash avocados with a fork." \
-		"  3. Add lime juice and salt to taste." > guacamole.yaml
-	git add guacamole.yaml
-	git commit -m "Add instructions to guacamole recipe."
 	git switch main
-	git merge finish-guac-recipe
+	git branch finish-pie-recipe
+	git switch finish-pie-recipe
+	printf '%s\n' \
+		"# Instructions" \
+		"  1. Preheat oven to 350F." \
+		"  2. Make the Pie" \
+		"  3. Bake for 45 minutes." >> pies/apple-pie.md
+	git add pies/apple-pie.md
+	git commit -m "Add instructions to apple pie recipe."
+	git switch main
+	git merge finish-pie-recipe
 
 # 06-tags: a lightweight tag and an annotated tag
-git-adv-06-tags: git-adv-05-merging
+git-adv-06-tags: git-adv-05-merging-exercise-01
 	cd $(REPO_PATH)
 	git tag git-adv-06-tags
 	git branch git-adv-06-tags
