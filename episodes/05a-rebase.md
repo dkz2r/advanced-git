@@ -1,5 +1,5 @@
 ---
-title: ''
+title: 'Rebasing'
 teaching: 10
 exercises: 2
 ---
@@ -76,14 +76,14 @@ nano groceries.md
 
 # Market B
 * lettuce: 1 per unit
-* parmesean cheese: 2 per unit
+* parmesan cheese: 2 per unit
 ```
 
 The add and commit this to the main branch.
 
 ```bash
 git add groceries.md
-git commit -m "Add lettuce and parmesean cheese to groceries"
+git commit -m "Add lettuce and parmesan cheese to groceries"
 ```
 
 Now let's switch back to our `salads` branch.
@@ -99,7 +99,7 @@ nano ceasar-salad.md
 # Ceasar Salad
 ## Ingredients
 - lettuce
-- parmesean cheese
+- parmesan cheese
 ## Instructions
 ```
 
@@ -115,7 +115,7 @@ We check the log and see this:
 $ git log --oneline --graph --all -n 10
 * 8655b28 (HEAD -> salads) Add ingredients to ceasar salad recipe
 * f37c5b4 Add ceasar salad recipe
-| * 4dcff9b (main) Add lettuce and parmesean cheese to groceries
+| * 4dcff9b (main) Add lettuce and parmesan cheese to groceries
 |/
 * 715dcdf (finish-pie-recipe) Add instructions to apple pie recipe.
 *   451c1e3 (tag: git-adv-05-merging-exercise-01) Resolve merge conflict in sals
@@ -152,7 +152,7 @@ When we look at the log again, we see this:
 $ git log --oneline --graph --all -n 10
 * 1f8d043 (HEAD -> salads) Add ingredients to ceasar salad recipe
 * 0625bda Add ceasar salad recipe
-* 4dcff9b (main) Add lettuce and parmesean cheese to groceries
+* 4dcff9b (main) Add lettuce and parmesan cheese to groceries
 * 715dcdf (finish-pie-recipe) Add instructions to apple pie recipe.
 *   451c1e3 (tag: git-adv-05-merging-exercise-01) Resolve merge conflict in salsa.md.
 |\
@@ -202,7 +202,7 @@ nano groceries.md
 
 # Market B
 * lettuce: 1 per unit
-* parmesean cheese: 2 per unit
+* parmesan cheese: 2 per unit
 ```
 
 ```bash
@@ -219,7 +219,7 @@ nano ceasar-salad.md
 # Ceasar Salad
 ## Ingredients
 - lettuce
-- parmesean cheese
+- parmesan cheese
 ## Instructions
 - Wash the lettuce and slice it into strips.
 ```
@@ -242,7 +242,7 @@ nano groceries.md
 
 # Market B
 * lettuce: 1 per unit
-* parmesean cheese: 2 per unit
+* parmesan cheese: 2 per unit
 ```
 
 ```bash
@@ -321,7 +321,7 @@ $ cat groceries.md
 
 # Market B
 * lettuce: 1 per unit
-* parmesean cheese: 2 per unit
+* parmesan cheese: 2 per unit
 ```
 
 You can edit the file to resolve the conflict, then add the file and continue the rebase.
@@ -337,7 +337,8 @@ git rebase --continue
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
--
+- Rebasing is a way to incorporate changes from one branch into another, but it rewrites history instead of creating a merge commit.
+- Rebasing is an alternative to merging, and can be used to keep a feature branch up to date with the main branch.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 

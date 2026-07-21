@@ -288,11 +288,81 @@ git-adv-05-merging-exercise-01: git-adv-05-merging
 	git switch main
 	git merge finish-pie-recipe
 
+git-adv-05a-rebase: git-adv-05-merging-exercise-01
+	cd $(REPO_PATH)
+	git tag git-adv-05a-rebase
+	git switch main
+	git branch salads
+	git switch salads
+	printf '%s\n' "# Salads" "## Ingredients" "## Instructions" > ceasar-salad.md
+	git add ceasar-salad.md
+	git commit -m "Add ceasar salad recipe"
+	git switch main
+	printf '%s\n' \
+		"# Market A" \
+		"* avocado: 1.35 per unit." \
+		"* lime: 0.64 per unit." \
+		"* salt: 2 per unit." \
+		""
+		"# Market B" \
+		"* lettuce: 1 per unit." \
+		"* parmesan cheese: 2 per unit." > groceries.md
+	git add groceries.md
+	git commit -m "Add lettuce and parmesan cheese to groceries"
+	git switch salads
+	printf '%s\n' \
+		"# Ceasar Salad" \
+		"## Ingredients" \
+		"- lettuce" \
+		"- parmesan cheese" \
+		"## Instructions" > ceasar-salad.md
+	git add ceasar-salad.md
+	git commit -m "Add ingredients to ceasar salad recipe"
+	git rebase main
+
+git-adv-05a-rebase-exercise-01: git-adv-05a-rebase
+	cd $(REPO_PATH)
+	git tag git-adv-05a-rebase-exercise-01
+	git switch main
+	printf '%s\n' \
+		"# Market A" \
+		"* avocado: 1.35 per unit." \
+		"* lime: 0.64 per unit." \
+		"* salt: 2 per unit." \
+		"* tomatoes: 1.50 per unit." \
+		"" \
+		"# Market B" \
+		"* lettuce: 1 per unit." \
+		"* parmesan cheese: 2 per unit." > groceries.md
+	git add groceries.md
+	git commit -m "Add tomatoes to groceries"
+	git switch salads
+	printf '%s\n' \
+		"# Ceasar Salad" \
+		"## Ingredients" \
+		"- lettuce" \
+		"- parmesan cheese" \
+		"## Instructions" \
+		"- Wash the lettuce and slice it into strips." > ceasar-salad.md
+	git add ceasar-salad.md
+	git commit -m "Add instructions to ceasar salad recipe"
+	printf '%s\n' \
+		"# Market A" \
+		"* avocado: 1.35 per unit." \
+		"* lime: 0.64 per unit." \
+		"* salt: 2 per unit." \
+		"* lemons: 1.00 per unit." \
+		"" \
+		"# Market B" \
+		"* lettuce: 1 per unit." \
+		"* parmesan cheese: 2 per unit." > groceries.md
+	git add groceries.md
+	git commit -m "Add lemons to groceries"
+
 # 06-tags: a lightweight tag and an annotated tag
 git-adv-06-tags: git-adv-05-merging-exercise-01
 	cd $(REPO_PATH)
 	git tag git-adv-06-tags
-	git branch git-adv-06-tags
 	git tag 1.0.0
 	git tag -a 2.0.0 -m "Second Release"
 

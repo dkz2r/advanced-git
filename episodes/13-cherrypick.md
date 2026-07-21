@@ -105,7 +105,7 @@ b8732e4 Add bean dip recipe
 Now switch to the `main` branch and cherry-pick that commit:
 
 ```bash
-git checkout main
+git switch main
 git cherry-pick <commit-hash>
 ```
 
