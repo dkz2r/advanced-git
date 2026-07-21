@@ -535,5 +535,5 @@ entire-repository: git-adv-15-hooks-actions-challenge-01
 	git push --all --force origin
 
 create-woodworking-repo:
-    @echo "Creating woodworking repository..."
-    ./instructors/files/create-woodworking-repo.sh -r $(FORKING_REPO)
+	@echo "Creating woodworking repository..."
+	./instructors/files/create-woodworking-repo.sh -r $(FORKING_REPO)
