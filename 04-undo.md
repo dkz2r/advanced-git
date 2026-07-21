@@ -17,30 +17,158 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Git Revert
+## Ammending Commits
 
-Reverting undoes a commit by creating a new commit. This is a safe way to undo changes, as it has no chance of re-writing the commit history. For example, the following command will figure out the changes contained in the 2nd to last commit, create a new commit undoing those changes, and tack the new commit onto the existing project.
+Before we get into removing entire commits from the working tree, let's start with a tiny common problem: you just made a commit, but as soon as you hit enter, you realise there's a typo in your commit message!
+Or you realize there's a file you intended to include in that commit but forgot to add it!
 
-Let's make a commit to revert first. On our `bean-dip` branch, let's add a line to our `bean-dip.md` file and commit it.
+**As long as you haven't pushed your commit to a remote repository**, you can fix this with `git commit --amend`.
+
+Let's see how to do this with an example:
+
+First, let's make a pair of files that we want to commit:
 
 ```bash
-nano bean-dip.md
+mkdir breads
+nano breads/banana-bread.md
+nano breads/french-baguette.md
 ```
 
 ```markdown
-# Bean Dip
+# Banana Bread
 ## Ingredients
-- beans
 ## Instructions
-- Purchase the bean dip.
+```
+
+```markdown
+# French Baguette
+## Ingredients
+## Instructions
+```
+
+Now we're ready to make our commit:
+
+```bash
+git add breads/banana-bread.md
+git commit -m "Ad bread recipe templates"
+```
+
+Whoops! We made a typo in our commit message. Let's fix that with `git commit --amend`:
+
+```bash
+git commit --amend
+```
+
+This will open up your default text editor as though you were making a new commit, however it comes pro-populated with the previous commit message.
+Let's edit the message to fix the typo and save the file.
+
+The message we get when closing the editor is similar to when we make a new commit:
+
+```output
+$ git commit --amend
+[main 12e5be8] Add bread recipe templates
+ Date: Mon Jul 20 11:01:52 2026 +0200
+ 1 file changed, 3 insertions(+)
+ create mode 100644 breads/banana-bread.md
+```
+
+And if we check the log, we can see that the commit message has been updated:
+
+```bash
+git log --oneline -n 1
+```
+
+```output
+$ git log --oneline -n 1
+12e5be8 (HEAD -> main) Add bread recipe templates
+```
+
+But wait again! We actually intended to add both breads to our commit!
+Let's add that file and amend the commit again:
+
+```bash
+git add breads/french-baguette.md
+git commit --amend
+```
+
+This time in the text editor, notice that the "Changes to be committed" section shows both files that will be included in the commit.
+We don't actually have to change the commit message this time - we can just save and close the editor to complete the amend.
+
+```output
+$ git commit --amend
+[main b18f769] Add bread recipe templates
+ Date: Mon Jul 20 11:01:52 2026 +0200
+ 2 files changed, 6 insertions(+)
+ create mode 100644 breads/banana-bread.md
+ create mode 100644 breads/french-baguette.md
+```
+
+::: callout
+
+If you are sure you don't want to change the commit message, you can also use the `--no-edit` flag to skip opening the editor:
+
+```bash
+git commit --amend --no-edit
+```
+
+:::
+
+
+As long as the commit hasn't been pushed to a remote repository, you can always use `git commit --amend` to fix mistakes in your last commit.
+
+::: callout
+
+What about editing older commits?
+Again, as long as it hasn't been pushed to a remote repository we can do this, but it requries a different technique called "interactive rebasing" - we will cover this later in the workshop!
+
+:::
+
+## Git Revert
+
+What about when we make a commit and we later decide that we don't want those changes after all?
+We can use `git revert` to undo the changes made in a commit.
+
+Reverting undoes a commit by creating a new commit. This is a safe way to undo changes, as it has no chance of re-writing the commit history. For example, the following command will figure out the changes contained in the 2nd to last commit, create a new commit undoing those changes, and tack the new commit onto the existing project.
+
+Let's make a commit to revert first. We'll start a new file called `pea-soup.md` and add a few lines to it.
+
+```bash
+nano pea-soup.md
+```
+
+```markdown
+# Pea Soup
+## Ingredients
+## Instructions
 ```
 
 ```bash
-git add bean-dip.md
-git commit -m "Add bean dip recipe"
+git add pea-soup.md
+git commit -m "Add pea soup recipe"
 ```
 
-After making that commit, maybe we second guess and decide we don't want that change after all. We can use `git revert` to back out that last commit.
+After making that commit, we decide to add some ingredients to our recipe. We add a few lines to our `pea-soup.md` file and commit those changes.
+
+```bash
+nano pea-soup.md
+```
+
+```markdown
+# Pea Soup
+## Ingredients
+- watermelon
+## Instructions
+```
+
+And then we commit those changes.
+
+```bash
+git add pea-soup.md
+git commit -m "Add ingredients to pea soup recipe"
+```
+
+But wait, watermelon? We must have been thinking of something else.
+That doesn't belong! We can use `git revert` to back out that last commit.
 
 ```bash
 git revert HEAD
@@ -56,9 +184,9 @@ git log --oneline
 
 ```output
 $ git log --oneline
-96f26c7 (HEAD -> bean-dip) Revert "Add bean dip recipe"
-b8732e4 Add bean dip recipe
-79cb366 (origin/bean-dip) Add bean dip recipe.
+ac47927 (HEAD -> main) Revert "Add ingredients to pea soup recipe"
+a83fe04 Add ingredients to pea soup recipe
+6f3c604 Add pea soup recipe
 ```
 
 Reverting doesn't actually delete the previous commit - it just creates a new commit that undoes exactly the changes made in that commit.
@@ -86,13 +214,40 @@ git reset HEAD~1
 ```output
 $ git reset HEAD~1
 Unstaged changes after reset:
-D       bean-dip.md
+M       pea-soup.md
+```
+
+If we look at git status, we can see that we have modified the file with this command:
+
+```bash
+$ git status
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   pea-soup.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+Resetting the branch like this does not delete the commits, nor does it add any new commits to the history like `git revert` does.
+Instead, it moves the branch pointer backwards in time, effectively removing the last commit from the branch.
+
+In fact, if we look at the log, we can see that the most recent commit, where we reverted the "watermelon" change, is no longer part of the history of the branch.
+
+```bash
+git log --oneline
+```
+
+```output
+$ git log --oneline
+9e0eb63 (HEAD -> main) Add initial README with repository information
+703cc5d Extend guacamole recipe to include lime juice.
 ```
 
 ![git reset](fig/07-reset.png){alt="A diagram showing a repository before and after resetting the last commit."}
 
-
-The two commits that were on the end of `hotfix` are now dangling, or orphaned commits. This means they will be deleted the next time `git` performs a garbage collection. In other words, you’re saying that you want to throw away these commits.
+In this graphical depiction of git reset, the commits that were on the end of `hotfix` are now dangling, or orphaned commits. This means they will be deleted the next time `git` performs a garbage collection. In other words, you’re saying that you want to throw away these commits.
 
 `git reset` is a simple way to undo changes that haven’t been shared with anyone else. It’s your go-to command when you've started working on a feature and find yourself thinking, “Oh crap, what am I doing? I should just start over.”
 
@@ -126,6 +281,8 @@ git reset HEAD~2 foo.txt
 ```
 
 :::
+
+::: instructor
 
 ## Git Checkout: A Gentle Way
 
@@ -196,10 +353,64 @@ If you haven't made any changes or you have made changes but you want to discard
 git checkout hotfix
 ```
 
+:::
+
 https://www.atlassian.com/git/tutorials/resetting-checking-out-and-reverting
 Also OMG: http://blog.kfish.org/2010/04/git-lola.html
 
-## Exercise: Undoing Changes
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Challenge: Amending a Commit
+
+Let's practice amending a commit.
+
+1. Edit our `tomato-soup.md` file to add an ingredient:
+
+```bash
+nano tomato-soup.md
+```
+
+```markdown
+# Tomato Soup
+## Ingredients
+- tomatoes
+## Instructions
+```
+
+2. Add and commit the change with a message that has a typo in it.
+
+```bash
+git add tomato-soup.md
+git commit -m "Add ingredints to tomato soup recipe"
+```
+
+3. Whoops! We forgot to add some additional ingredients to the recipe! Do so and save the file.
+
+```bash
+nano tomato-soup.md
+```
+
+```markdown
+# Tomato Soup
+## Ingredients
+- tomatoes
+- water
+- salt
+## Instructions
+```
+
+How can we correct our commit?
+We need to fix the typo in the message and ensure that the ingredients that we forgot to add are included in the commit.
+
+:::::::::::::::: solution
+
+```bash
+git add tomato-soup.md
+git commit --amend
+```
+
+:::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 

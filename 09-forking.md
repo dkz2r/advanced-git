@@ -16,15 +16,13 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Preparation: Make sure that the main is clean, everything is committed.
+## Forking Workflow
 
 The forking workflow is popular among open source software projects and often used in conjunction with a branching model.
 
 The main advantage is that you enable people external to your project to implement and suggest changes to your project without the need to give them push access to your project.
-In this workflow developers usually interact with multiple (at least two) repositories and remotes: the original code
-repository and the forked repository.
-It is important to understand that a fork represents a **complete copy** of a
-remote repository.
+In this workflow developers usually interact with multiple (at least two) repositories and remotes: the original code repository and the forked repository.
+It is important to understand that a fork represents a **complete copy** of a remote repository.
 
 In order to understand the forking workflow, let's first take a look at some special words and roles needed:
 
@@ -35,19 +33,14 @@ In order to understand the forking workflow, let's first take a look at some spe
 - **contributor** - Someone who contributes to upstream via PRs/MRs
 - **release manager** - A maintainer who also oversees releases
 
-In this workflow changes are suggested and integrated into the "upstream main" branch via a
-pull/merge request from an "origin branch" (and not the "origin main").
-The "origin main" branch is updated by pulling changes from the "upstream main"
-as they become available.
+In this workflow changes are suggested and integrated into the "upstream main" branch via a pull/merge request from an "origin branch" (and not the "origin main").
+The "origin main" branch is updated by pulling changes from the "upstream main"as they become available.
 
-This way the "upstream main" remains the true source for any suggested change
-in the project, while allowing anyone to work on their own contributions independently.
+This way the "upstream main" remains the true source for any suggested change in the project, while allowing anyone to work on their own contributions independently.
 
 ::: callout
-Pull requests / merge requests are a service of the hosting platform to ease
-code reviews and managing changes. They only work **within the same hosting
-service**, while you certainly have remotes on several hosting services
-configured for a repository.
+Pull requests / merge requests are a service of the hosting platform to ease code reviews and managing changes.
+They only work **within the same hosting service**, while you certainly have remotes on several hosting services configured for a repository.
 :::
 
 ![Forking Workflow](fig/forking_workflow.svg){alt="A diagram showing the forking workflow with upstream, origin, and local repositories."}
