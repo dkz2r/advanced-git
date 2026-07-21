@@ -16,6 +16,9 @@
     <loc>https://carpentries-incubator.github.io/advanced-git/05-merging.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/advanced-git/05a-rebase.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/advanced-git/06-tags.html</loc>
   </url>
   <url>
@@ -86,6 +89,9 @@
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/advanced-git/instructor/05-merging.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/advanced-git/instructor/05a-rebase.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/advanced-git/instructor/06-tags.html</loc>

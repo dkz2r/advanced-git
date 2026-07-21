@@ -210,8 +210,8 @@
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#introduction">Introduction</a></li>
-<li><a href="#challenges">Challenges</a></li>
-<li><a href="#review-of-intro-git-commands">Review of Intro Git Commands</a></li>
+<li><a href="#why-git-is-challenging">Why Git is Challenging</a></li>
+<li><a href="#quick-review">Quick Review</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -257,7 +257,7 @@
 <div class="accordion accordion-flush" id="accordionFlush7">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading7">
-        <a href="06-tags.html">6. Tags</a>
+        <a href="05a-rebase.html">6. Rebasing</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -266,7 +266,7 @@
 <div class="accordion accordion-flush" id="accordionFlush8">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading8">
-        <a href="07-branching-models.html">7. Branching Models</a>
+        <a href="06-tags.html">7. Tags</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -275,7 +275,7 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="09-forking.html">8. Forking Workflow</a>
+        <a href="07-branching-models.html">8. Branching Models</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -284,7 +284,7 @@
 <div class="accordion accordion-flush" id="accordionFlush10">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading10">
-        <a href="10-datascience.html">9. Data Science Workflow</a>
+        <a href="09-forking.html">9. Forking Workflow</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -293,7 +293,7 @@
 <div class="accordion accordion-flush" id="accordionFlush11">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading11">
-        <a href="12-large-files.html">10. Large Files</a>
+        <a href="10-datascience.html">10. Data Science Workflow</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -302,7 +302,7 @@
 <div class="accordion accordion-flush" id="accordionFlush12">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading12">
-        <a href="13-cherrypick.html">11. Undo, Move, cherry-pick</a>
+        <a href="12-large-files.html">11. Large Files</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -311,7 +311,7 @@
 <div class="accordion accordion-flush" id="accordionFlush13">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading13">
-        <a href="14-squash-rebase.html">12. Interactive Rebase and Squash</a>
+        <a href="13-cherrypick.html">12. Undo, Move, cherry-pick</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -320,7 +320,7 @@
 <div class="accordion accordion-flush" id="accordionFlush14">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading14">
-        <a href="15-hooks-actions.html">13. Hooks</a>
+        <a href="14-squash-rebase.html">13. Interactive Rebase and Squash</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -329,7 +329,7 @@
 <div class="accordion accordion-flush" id="accordionFlush15">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading15">
-        <a href="16-tools.html">14. Setting up the Command Prompt</a>
+        <a href="15-hooks-actions.html">14. Hooks</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -338,7 +338,16 @@
 <div class="accordion accordion-flush" id="accordionFlush16">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading16">
-        <a href="17-resources.html">15. Additional Resources</a>
+        <a href="16-tools.html">15. Setting up the Command Prompt</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush17">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading17">
+        <a href="17-resources.html">16. Additional Resources</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -454,36 +463,55 @@ code. Instead, users share code back and forth to synchronize their
 repositories, and it is up to each project to define processes and
 procedures for managing the flow of changes into a stable software
 product.</p>
-</section><section><h2 class="section-heading" id="challenges">Challenges<a class="anchor" aria-label="anchor" href="#challenges"></a></h2>
+</section><section><h2 class="section-heading" id="why-git-is-challenging">Why Git is Challenging<a class="anchor" aria-label="anchor" href="#why-git-is-challenging"></a></h2>
 <hr class="half-width"><p>Git is powerful and flexible to fit a wide range of use cases and
 workflows from simple projects written by a single contributor to
 projects that are millions of lines and have hundreds of co-authors.
 Furthermore, it does a task that is quite complex. As a result, many
 users may find it challenging to navigate this complexity. While
-committing and sharing changes is fairly straightforward, for instance,
-but recovering from situations such as accidental commits, pushes or bad
-merges is difficult without a solid understanding of the rather large
-and complex conceptual model. Case in point, three of the top five
-highest voted questions on Stack Overflow are questions about how to
-carry out relatively simple tasks: undoing the last commit, changing the
-last commit message, and deleting a remote branch.</p>
-<p><a href="https://xkcd.com/1597/" class="external-link"><img src="fig/01-xkcd-git.png" alt="An XKCD comic about the git control system." class="figure"></a></p>
-<p>Mouse-over text: If that doesn’t fix it, git.txt contains the phone
-number of a friend of mine who understands git. Just wait through a few
-minutes of ‘It’s really pretty simple, just think of branches as…’ and
-eventually you’ll learn the commands that will fix everything.</p>
-<p>With this lesson our goal is to give a you a more in-depth
+committing and sharing changes is fairly straightforward, recovering
+from situations such as accidental commits, pushes or bad merges is
+difficult without a solid understanding of the rather large and complex
+conceptual model. Case in point, three of the top five highest voted
+questions on Stack Overflow are questions about how to carry out
+relatively simple tasks: undoing the last commit, changing the last
+commit message, and deleting a remote branch.</p>
+<figure><img src="fig/01-xkcd-git.png" alt="An XKCD comic about the git control system." class="figure mx-auto d-block"><div class="figcaption">XKCD: “Git” (<a href="https://xkcd.com/1597/" class="external-link uri">https://xkcd.com/1597/</a>)</div>
+</figure><p><em>Mouse-over text: If that doesn’t fix it, git.txt contains the
+phone number of a friend of mine who understands git. Just wait through
+a few minutes of ‘It’s really pretty simple, just think of branches as…’
+and eventually you’ll learn the commands that will fix
+everything.</em></p>
+<p>With this lesson our goal is to give you a more in-depth
 understanding of the conceptual model of git, to guide you through
 increasingly complex workflows and to give you the confidence to
 participate in larger projects.</p>
-</section><section><h2 class="section-heading" id="review-of-intro-git-commands">Review of Intro Git Commands<a class="anchor" aria-label="anchor" href="#review-of-intro-git-commands"></a></h2>
-<hr class="half-width"><p>First, lets review the concepts and commands that constitute the
-basic git workflow.</p>
+</section><section><h2 class="section-heading" id="quick-review">Quick Review<a class="anchor" aria-label="anchor" href="#quick-review"></a></h2>
+<hr class="half-width"><p>Let’s take a moment to review some of the basic git commands.</p>
+<div class="section level3">
+<h3 id="initializing-a-repository">Initializing a Repository<a class="anchor" aria-label="anchor" href="#initializing-a-repository"></a></h3>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="fu">git</span> init</span></code></pre>
 </div>
+<p>“git init” creates a new git repository in the current directory.
+Specifically, this means creating a subdirectory named <code>.git</code>
+that contains your repository’s metadata and object database. Generally
+speaking, we don’t tinker with this directory, but it’s useful to know
+that it exists and that is is the marker of a folder on our computer
+being a git repository.</p>
+</div>
+<div class="section level3">
+<h3 id="the-git-workflow">The Git Workflow<a class="anchor" aria-label="anchor" href="#the-git-workflow"></a></h3>
+<p>Git has a three-stage workflow: the working directory, the staging
+area, and the repository. When we make changes to files in our working
+directory, they are not included in the next commit until we stage them,
+which is done by adding them to the staging area. The staging area
+allows us to prepare a snapshot of the changes before committing them to
+the repository. Once we are satisfied with the changes in the staging
+area, we can commit them to the repository, which records the changes
+and creates a new commit object.</p>
 <figure><img src="fig/02-staging-area.png" alt="A diagram showing the relationship between the working directory, staging area, and repository in git." class="figure mx-auto d-block"><div class="figcaption">Staging Area</div>
 </figure><div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -517,66 +545,388 @@ the time of the commit.</p></li>
 </figure><p>All these elements together generate a unique <strong>commit
 hash</strong>, which identifies the commit across the Git
 repository.</p>
-<div class="codewrapper sourceCode" id="cb3">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="fu">git</span> log</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1" aria-label="code-block-3-2"></a><span class="fu">git</span> status</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1" aria-label="code-block-3-3"></a><span class="fu">git</span> diff</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1" aria-label="code-block-3-4"></a><span class="fu">git</span> checkout HEAD file.txt</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1" aria-label="code-block-3-5"></a><span class="fu">git</span> revert</span></code></pre>
 </div>
-<p><code>git checkout</code> returns the files not yet committed within
-the local repository to a previous state, whereas
-<code>git revert</code> reverses changes committed to the local and
-project repositories.</p>
-<div class="codewrapper sourceCode" id="cb4">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a><span class="fu">git</span> clone http://....</span></code></pre>
+<div class="section level3">
+<h3 id="interacting-with-remote-repositories">Interacting with Remote Repositories<a class="anchor" aria-label="anchor" href="#interacting-with-remote-repositories"></a></h3>
+<p>To collaborate with others, we often work with remote
+repositories.</p>
+<ul><li>
+<code>git clone http://....</code>: Creates a local copy of a remote
+repository, allowing you to work on it locally.</li>
+<li>
+<code>git push</code>: Uploads your local commits to a remote
+repository, sharing your changes with others.</li>
+<li>
+<code>git pull</code>: Fetches and integrates changes from a remote
+repository into your local branch, keeping your local copy up to
+date.</li>
+<li>
+<code>git fetch</code>: Downloads commits, files, and refs from a
+remote repository into your local repository without merging them into
+your current branch.</li>
+</ul><div id="callout1" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="codewrapper sourceCode" id="cb5">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1" aria-label="code-block-5-1"></a><span class="fu">git</span> push</span></code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb6">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="fu">git</span> pull</span></code></pre>
-</div>
-<p>Finally, the <code>git fetch</code> command downloads commits, files,
-and refs from a remote repository into your local repository. When
-downloading content from a remote repository, <code>git pull</code> and
-<code>git fetch</code> commands are available to accomplish the task.
-You can consider git fetch the ‘safe’ version of the two commands. It
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>You can consider git fetch the ‘safe’ version of the two commands. It
 will download the remote content but not update your local repository’s
 working state, leaving your current work intact. <code>git pull</code>
 is the more aggressive alternative; it will download the remote content
 for the active local branch and immediately execute
 <code>git merge</code> to create a merge commit for the new remote
 content. If you have pending changes in progress this will cause
-conflicts and kick-off the merge conflict resolution flow. The following
-command will bring down <strong>all</strong> the changes from the
-remote:</p>
-<div class="codewrapper sourceCode" id="cb7">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a><span class="fu">git</span> fetch</span></code></pre>
+conflicts and kick-off the merge conflict resolution flow.</p>
+</div>
+</div>
 </div>
 <p>It is sometimes useful to only pull the changes from a certain
 branch, e.g., <code>main</code>. For a repository that has a lot of
 contributors and branches, all the changes may be unnecessary and
 overwhelming:</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="fu">git</span> fetch origin main</span></code></pre>
+</div>
+<div id="prereq1" class="callout prereq">
+<div class="callout-square">
+<i class="callout-icon" data-feather="check"></i>
+</div>
+<span class="callout-header">Prerequisite</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>In the event you haven’t already, let’s clone the repository for this
+lesson now.</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a><span class="fu">git</span> clone {REPOSITORY_URL}</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="exploring-the-repository">Exploring the Repository<a class="anchor" aria-label="anchor" href="#exploring-the-repository"></a></h3>
+<p>Let’s take a moment to explore the repository we just cloned. We can
+use the <code>git log</code> command to view the commit history of the
+repository up to this point in time:</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1" aria-label="code-block-5-1"></a><span class="ex">$</span> git log</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1" aria-label="code-block-5-2"></a><span class="ex">commit</span> da7172ad6db7bdb5b3ffe5db10bcb1177f551298 <span class="er">(</span><span class="ex">HEAD</span> <span class="at">-</span><span class="op">&gt;</span> main, git-adv-01-introduction<span class="kw">)</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1" aria-label="code-block-5-3"></a><span class="ex">Author:</span> Example User <span class="op">&lt;</span>example@email.com<span class="op">&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1" aria-label="code-block-5-4"></a><span class="ex">Date:</span>   Thu Jul 16 21:42:42 2026 +0200</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1" aria-label="code-block-5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1" aria-label="code-block-5-6"></a>    <span class="ex">Merge</span> changes from remote repository</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1" aria-label="code-block-5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1" aria-label="code-block-5-8"></a><span class="ex">commit</span> bfbd431e4cb1e7fd6a11c9bfe56d678250bb50cb <span class="er">(</span><span class="ex">git-basic-09-conflict</span><span class="kw">)</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1" aria-label="code-block-5-9"></a><span class="ex">Author:</span> Example User <span class="op">&lt;</span>example@email.com<span class="op">&gt;</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1" aria-label="code-block-5-10"></a><span class="ex">Date:</span>   Thu Jul 16 21:42:41 2026 +0200</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1" aria-label="code-block-5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1" aria-label="code-block-5-12"></a>    <span class="ex">Add</span> ingredients for hummus</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1" aria-label="code-block-5-13"></a></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1" aria-label="code-block-5-14"></a><span class="ex">commit</span> b6c4da3d8c0b62135d21293cbc1bc0e2ea812e3d <span class="er">(</span><span class="ex">git-basic-08-collab,</span> git-basic-07-remotes<span class="kw">)</span></span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1" aria-label="code-block-5-15"></a><span class="ex">Author:</span> Example User <span class="op">&lt;</span>example@email.com<span class="op">&gt;</span></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1" aria-label="code-block-5-16"></a><span class="ex">Date:</span>   Thu Jul 16 21:42:41 2026 +0200</span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1" aria-label="code-block-5-17"></a></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1" aria-label="code-block-5-18"></a>    <span class="ex">Ignore</span> png files and the pictures folder.</span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1" aria-label="code-block-5-19"></a><span class="bu">:</span></span></code></pre>
+</div>
+<p>It is likely that the commits from this repository will not fit on
+your screen. If this is the case, you will see a <code>:</code>
+character at the bottom of the screen, indicating that you are in
+“pager” mode. You can use the arrow keys to scroll up and down through
+the commit history, or press <code>q</code> to exit pager mode and
+return to the command prompt.</p>
+<div id="callout2" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p>At the end of each commit hash, you can see some information in
+parentheses. This indicates the names of branches that point to that
+commit. There’s a special branch called <code>HEAD</code> that points to
+the current commit you are on. In this case, <code>HEAD</code> is
+pointing to the <code>main</code> branch, which is also pointing to the
+most recent commit.</p>
+</div>
+</div>
+</div>
+<p>Like the <code>git commit</code> command, we can add additional
+“flags” to the command to customize the output. Try the following to get
+a more compact view of the commit history:</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1" aria-label="code-block-6-2"></a><span class="fu">git</span> log <span class="at">-n</span> 3</span></code></pre>
+</div>
+</div>
+<div class="section level3">
+<h3 id="comparing-files-between-commits">Comparing Files between Commits<a class="anchor" aria-label="anchor" href="#comparing-files-between-commits"></a></h3>
+<p>One of the most useful features of git is the ability to quickly view
+or compare changes made to files between commits. We can use the
+<code>git diff</code> command to see differences between the most recent
+commit and an earlier commit by providing the commit hash of the earlier
+commit.</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">DIFF<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode diff" tabindex="0"><code class="sourceCode diff"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a>$ git diff b6c4da3</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1" aria-label="code-block-7-2"></a></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1" aria-label="code-block-7-3"></a><span class="kw">diff --git a/guacamole.md b/guacamole.md</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1" aria-label="code-block-7-4"></a>index 76a6108..18682f5 100644</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1" aria-label="code-block-7-5"></a><span class="dt">--- a/guacamole.md</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1" aria-label="code-block-7-6"></a><span class="dt">+++ b/guacamole.md</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1" aria-label="code-block-7-7"></a><span class="dt">@@ -4,3 +4,4 @@</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1" aria-label="code-block-7-8"></a> * lime (0.64)</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1" aria-label="code-block-7-9"></a> * salt (2)</span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1" aria-label="code-block-7-10"></a> ## Instructions</span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1" aria-label="code-block-7-11"></a><span class="va">+* peel the avocados and put them into a bowl.</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1" aria-label="code-block-7-12"></a><span class="kw">diff --git a/hummus.md b/hummus.md</span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1" aria-label="code-block-7-13"></a>new file mode 100644</span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1" aria-label="code-block-7-14"></a>index 0000000..3c51b6b</span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1" aria-label="code-block-7-15"></a><span class="dt">--- /dev/null</span></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1" aria-label="code-block-7-16"></a><span class="dt">+++ b/hummus.md</span></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1" aria-label="code-block-7-17"></a><span class="dt">@@ -0,0 +1,6 @@</span></span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1" aria-label="code-block-7-18"></a><span class="va">+# Hummus</span></span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1" aria-label="code-block-7-19"></a><span class="va">+## Ingredients</span></span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1" aria-label="code-block-7-20"></a><span class="va">+* chickpeas</span></span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1" aria-label="code-block-7-21"></a><span class="va">+* lemon</span></span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1" aria-label="code-block-7-22"></a><span class="va">+* olive oil</span></span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1" aria-label="code-block-7-23"></a><span class="va">+* salt</span></span></code></pre>
+</div>
+<p>We can also use relative commit references to compare files between
+commits, instead of using the full commit hash.</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1" aria-label="code-block-8-1"></a><span class="fu">git</span> fetch origin main</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1" aria-label="code-block-8-1"></a><span class="fu">git</span> diff HEAD~2</span></code></pre>
 </div>
 <p><a href="https://www.atlassian.com/git/tutorials/syncing/git-fetch" class="external-link uri">https://www.atlassian.com/git/tutorials/syncing/git-fetch</a></p>
-<p><img src="fig/03-recap.png" alt="Review 2" class="figure">{alt =“A diagram showing
-alternate diagrams for understanding the working directory, staging
-area, and repository in git, as well as commits on a branch.”}</p>
+<figure><img src="fig/03-recap.png" alt="A diagram showing alternate diagrams for understanding the working directory, staging area, and repository in git, as well as commits on a branch." class="figure mx-auto d-block"><div class="figcaption">Review 2</div>
+</figure><div id="challenge-1-what-will-happen" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="challenge-1-what-will-happen" class="callout-inner">
+<h3 class="callout-title">Challenge 1: What will happen?</h3>
+<div class="callout-content">
+<p>The following is a series of git commands that will be executed in a
+repository. What message will be displayed after each
+<code>git status</code> command? Why? Will this work or will it
+error?</p>
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1" aria-label="code-block-9-1"></a><span class="co"># The file ham_sandwich.txt is created in the working directory and contains some text.</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1" aria-label="code-block-9-2"></a><span class="fu">git</span> status <span class="co"># 1. What will this display?</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1" aria-label="code-block-9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1" aria-label="code-block-9-4"></a><span class="fu">git</span> add ham_sandwich.txt</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1" aria-label="code-block-9-5"></a><span class="fu">git</span> status <span class="co"># 2. What will this display?</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1" aria-label="code-block-9-6"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add my new file"</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1" aria-label="code-block-9-7"></a></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1" aria-label="code-block-9-8"></a><span class="co"># Changes are made to ham_sandwich.txt</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1" aria-label="code-block-9-9"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Update my new file"</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1" aria-label="code-block-9-10"></a><span class="fu">git</span> status <span class="co"># 3. What will this display?</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1" aria-label="code-block-9-11"></a></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1" aria-label="code-block-9-12"></a><span class="co"># Changes are made to ham_sandwich.txt</span></span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1" aria-label="code-block-9-13"></a><span class="fu">git</span> commit <span class="at">-a</span> <span class="at">-m</span> <span class="st">"Update my new file"</span></span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1" aria-label="code-block-9-14"></a><span class="fu">git</span> status <span class="co"># 4. What will this display?</span></span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1" aria-label="code-block-9-15"></a></span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1" aria-label="code-block-9-16"></a><span class="co"># We make a new file called salami_sandwich.txt</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1" aria-label="code-block-9-17"></a><span class="fu">git</span> commit <span class="at">-a</span> <span class="at">-m</span> <span class="st">"Add salami_sandwich.txt"</span></span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1" aria-label="code-block-9-18"></a><span class="fu">git</span> status <span class="co"># 4. What will this display?</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionHint1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
+  <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
+</button>
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div class="accordion-body">
+<p>The “-a” flag in the <code>git commit</code> command automatically
+stages files that have been modified and deleted, without having to
+explicitly run <code>git add</code> on them.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<ol style="list-style-type: decimal"><li>We will see a message that ham_sandwich.txt is an untracked file in
+our working directory, but that there is nothing currently added to the
+staging area.</li>
+<li>We will see a message that ham_sandwich.txt is in the staging area
+and ready to be committed.</li>
+<li>We failed to “add” the changes made to ham_sandwich.txt to the
+staging area before committing, but this will not error. Instead we will
+see a message similar to “git status”, indicating that there are changes
+in the working directory that have not been staged for commit.</li>
+<li>We will see that the working area is clean, and that there is
+nothing to commit, because the changes made to ham_sandwich.txt were
+automatically staged and committed with the “-a” flag.</li>
+<li>We will see a message that salami_sandwich.txt is an untracked file
+in our working directory, but that there is nothing currently added to
+the staging area. The “-a” flag does not automatically stage new files,
+only modified and deleted files.</li>
+</ol></div>
+</div>
+</div>
+</div>
+<div id="challenge-2-practice-the-git-workflow" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="challenge-2-practice-the-git-workflow" class="callout-inner">
+<h3 class="callout-title">Challenge 2: Practice the Git Workflow</h3>
+<div class="callout-content">
+<p>Let’s take a moment to practice the git workflow we just reviewed.
+Add a new file to the repository called <code>salsa.md</code> and add
+the following content to it:</p>
+<div class="codewrapper sourceCode" id="cb10">
+<h3 class="code-label">MARKDOWN<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode markdown" tabindex="0"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" tabindex="-1" aria-label="code-block-10-1"></a><span class="fu"># Salsa</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1" aria-label="code-block-10-2"></a><span class="fu">## Ingredients</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1" aria-label="code-block-10-3"></a><span class="fu">## Instructions</span></span></code></pre>
+</div>
+<p>Add this file to the staging area and commit it to the repository
+with the message “Add salsa recipe”. Then, use <code>git log</code> to
+view the commit history and verify that your new commit is present,
+making a note of the commit hash. Finally, use
+<code>git show &lt;commit-hash&gt;</code> to view the details of your
+new commit.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb11">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1" aria-label="code-block-11-1"></a><span class="fu">nano</span> salsa.md <span class="co"># Or however you prefer to create &amp; edit a new file</span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1" aria-label="code-block-11-2"></a><span class="fu">git</span> add salsa.md</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1" aria-label="code-block-11-3"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add salsa recipe"</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1" aria-label="code-block-11-4"></a><span class="fu">git</span> log</span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1" aria-label="code-block-11-5"></a><span class="fu">git</span> show <span class="op">&lt;</span>commit-hash<span class="op">&gt;</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="challenge-3-tracing-the-changes-to-a-file" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="challenge-3-tracing-the-changes-to-a-file" class="callout-inner">
+<h3 class="callout-title">Challenge 3: Tracing the Changes to A
+File</h3>
+<div class="callout-content">
+<p>We’ve used <code>git log</code> to view the commit history of the
+repository, but what if we want to see the history of a specific
+file?</p>
+<p>Try the following command to see all of the commits that have
+affected the <code>guacamole.md</code> file:</p>
+<div class="codewrapper sourceCode" id="cb12">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1" aria-label="code-block-12-1"></a><span class="fu">git</span> log <span class="at">--</span> guacamole.md</span></code></pre>
+</div>
+<p>Pick two commit hashes from the output. How can we view all changes
+made to the <code>guacamole.md</code> file between those two
+commits?</p>
+</div>
+</div>
+</div>
+<div id="accordionHint2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
+  <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
+</button>
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
+<div class="accordion-body">
+<p>you can use the <code>git diff</code> command to view the changes
+made to a file between two commits. This might give us changes to other
+files, however. Use <code>git diff --help</code> to view the
+documentation for the command and see how to limit the output to a
+specific file.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionHint3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint3" aria-expanded="false" aria-controls="collapseHint3">
+  <h4 class="accordion-header" id="headingHint3"> Give me a hint </h4>
+</button>
+<div id="collapseHint3" class="accordion-collapse collapse" data-bs-parent="#accordionHint3" aria-labelledby="headingHint3">
+<div class="accordion-body">
+<p>The <code>git diff</code> command can be used like this:
+<code>git diff [&lt;options&gt;] &lt;commit&gt;..&lt;commit&gt; [--] [&lt;path&gt;...]</code></p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb13">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1" aria-label="code-block-13-1"></a><span class="fu">git</span> log <span class="at">--</span> guacamole.md</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1" aria-label="code-block-13-2"></a><span class="fu">git</span> diff 43507b2..71aa070 <span class="at">--</span> guacamole.md <span class="co"># Or whatever commit hashes you picked from the output of the previous command.</span></span></code></pre>
+</div>
+<p>output:</p>
+<div class="codewrapper sourceCode" id="cb14">
+<h3 class="code-label">DIFF<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode diff" tabindex="0"><code class="sourceCode diff"><span id="cb14-1"><a href="#cb14-1" tabindex="-1" aria-label="code-block-14-1"></a><span class="kw">diff --git a/guacamole.md b/guacamole.md</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1" aria-label="code-block-14-2"></a>index 76a6108..7c20bdd 100644</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1" aria-label="code-block-14-3"></a><span class="dt">--- a/guacamole.md</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1" aria-label="code-block-14-4"></a><span class="dt">+++ b/guacamole.md</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1" aria-label="code-block-14-5"></a><span class="dt">@@ -1,6 +1,6 @@</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1" aria-label="code-block-14-6"></a> # Guacamole</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1" aria-label="code-block-14-7"></a> ## Ingredients</span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1" aria-label="code-block-14-8"></a><span class="st">-* avocado (1.35)</span></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1" aria-label="code-block-14-9"></a><span class="st">-* lime (0.64)</span></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1" aria-label="code-block-14-10"></a><span class="st">-* salt (2)</span></span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1" aria-label="code-block-14-11"></a><span class="va">+* avocado</span></span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1" aria-label="code-block-14-12"></a><span class="va">+* lime</span></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1" aria-label="code-block-14-13"></a><span class="va">+* salt</span></span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1" aria-label="code-block-14-14"></a> ## Instructions</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -593,6 +943,7 @@ changes they make.</li>
 <li>This complex functionality is especially useful when collaborating
 on projects with others</li>
 </ul></div>
+</div>
 </div>
 </div>
 </section></div> <!-- / div.lesson-content -->
@@ -654,7 +1005,7 @@ on projects with others</li>
   "creativeWorkStatus": "active",
   "url": "https://carpentries-incubator.github.io/advanced-git/01-introduction.html",
   "identifier": "https://carpentries-incubator.github.io/advanced-git/01-introduction.html",
-  "dateCreated": "2026-07-15",
+  "dateCreated": "2026-07-21",
   "dateModified": "2026-07-21",
   "datePublished": "2026-07-21"
 }
