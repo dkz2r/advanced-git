@@ -16,87 +16,25 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## What is a Remote Repository?
-
-Remote repositories are versions of your project that are hosted somewhere else, typically on the Internet.
-Common examples of remote repositories are GitHub, GitLab, and Bitbucket.
-Remote repositories can be used to collaborate with other developers, or to simply back up your work.
-
-::: callout
-
-Though remote repositories are typically hosted on the Internet, they can also be hosted on a local network or even on the same machine as your local repository.
-The key is that they are separate from your local repository and can be accessed over a network.
-
-:::
-
-::: instructor
-
 https://www.atlassian.com/git/tutorials/syncing
 
 Git's distributed collaboration model, which gives every developer their own copy of the repository, complete with its own local history and branch structure. Users typically need to share a series of commits rather than a single "changeset". Instead of committing a "changeset" from a working copy to the central repository, Git lets you share entire branches between repositories.
 
-:::
+## Git remote
 
-## git remote
-
-The `git remote` command lets you create, view, and delete connections to other repositories.
-You can think of remote connections as more like bookmarks, rather than a direct connection to the remote repository.
-Instead of providing real-time access to another repository, they serve as convenient names that can be used to reference a not-so-convenient URL.
-
-::: callout
-
-Typically, the first remote connection you create is called `origin`.
-This is a convention that is used by most Git-based projects.
-The `origin` remote is usually the central repository that you cloned your local repository from, or the central repository that you will be pushing your changes to.
-
-:::
+The git remote command lets you create, view, and delete connections to other repositories. Remote connections are more like bookmarks rather than direct links into other repositories. Instead of providing real-time access to another repository, they serve as convenient names that can be used to reference a not-so-convenient URL.
 
 ![Remote Schematic](fig/06-remote.png){alt="A diagram showing a local git repository with remote connections to two other repositories."}
 
-For example, the diagram above shows two remote connections from your repo into the central repo and another developer's repo.
-Every time we wanted to reference these remote repositories, we could use the full URLs, however it is far more convenient to use a shorthand label.
-Instead of referencing them by their full URLs, you can pass the "origin" and "john" shortcuts to other Git commands.
-
-::: callout
+For example, the diagram above shows two remote connections from your repo into the central repo and another developer's repo. Instead of referencing them by their full URLs, you can pass the origin and john shortcuts to other Git commands.
 
 The `git remote` command is essentially an interface for managing a list of remote entries that are stored in the repository's `./.git/config` file. The following commands are used to view the current state of the remote list.
 
-:::
-
-Git is designed to give each developer an entirely isolated development environment.
-This means that information is not automatically passed back and forth between repositories.
-Instead, developers need to manually pull upstream commits into their local repository or manually push their local commits back up to the central repository.
-The `git remote` command is really just an easier way to pass URLs to these "sharing" commands.
-
-::: prereq
-
-We will need a remote repository to connect to at this point.
-You will need to have an account on a Git hosting service (GitHub, GitLab, Bitbucket, etc.) and have completed the steps to authenticate your local git installation with that service.
-
-:::
-
-## Creating a Remote Repository
-
-Using the service of your choosing, create a new repository.
-The exact steps for this will depend on the exact service that you are using.
-
-In general, look for a button or link, typically at the top of the page, that says "New Repository" or "Create Repository".
-You will need to provide a name for your repository, and given the opportunity to add a description and apply various settings or options.
-For the purposes of this workshop, create a repository called `recipes`.
-
-::: caution
-
-!! Make sure you do not initialize the remote repository with a README file or any other files. !!
-
-We already have a repository locally that contains commits that we have made up to this point.
-If you create a new remote repository and initialize it with a README file, then the remote repository will have an initial commit that does not exist in our local repository.
-This will cause problems when we try to push our local commits to the remote repository.
-
-:::
+Git is designed to give each developer an entirely isolated development environment. This means that information is not automatically passed back and forth between repositories. Instead, developers need to manually pull upstream commits into their local repository or manually push their local commits back up to the central repository. The `git remote` command is really just an easier way to pass URLs to these "sharing" commands.
 
 ## Adding a Remote Repository
 
-Now, we need to connect our local repository to that remote repository. The command for this is `git remote add`:
+Earlier, we created a repository on GitLab. Now, we need to connect our local repository to that remote repository. The command for this is `git remote add`:
 
 ```bash
 git remote add origin <REPOSITORY-URL>
@@ -118,10 +56,8 @@ Look for the green "Code" button on the upper right of the repository page. Clic
 
 :::
 
-Most hosting services will provide the URL in two forms: HTTPS and SSH. If you are unsure which one to use, choose HTTPS.
+Most hosting services will provide the URL in two forms: HTTPS and SSH. If you are unsure which one to use, choose HTTPS. SSH requires additional setup which we do not cover in this training.
 
-SSH requires additional setup which we do not cover in this training.
-You can find a guide for setting up SSH on GitHub in [the "Git Novice" workshop material](https://swcarpentry.github.io/git-novice/07-github.html#ssh-background-and-setup).
 :::
 
 ## View Remote Configuration
@@ -139,17 +75,15 @@ origin
 
 ::: callout
 
-When you clone a repository with `git clone`, `git` automatically creates a remote connection called `origin` pointing back to the cloned repository.
-This is useful for developers creating a local copy of a central repository, since it provides an easy way to pull upstream changes or publish local commits.
-This behaviour is also why most Git-based projects call their central repository origin.
-
-:::
+When you clone a repository with `git clone`, `git` automatically creates a remote connection called `origin` pointing back to the cloned repository. This is useful for developers creating a local copy of a central repository, since it provides an easy way to pull upstream changes or publish local commits. This behaviour is also why most Git-based projects call their central repository origin.
 
 We can ask `git` for a more verbose (`-v`) answer which gives us the URLs for the connections:
 
 ```bash
 git remote -v
 ```
+
+:::
 
 ## Syncing with Remote Repositories
 
@@ -159,71 +93,45 @@ So we have a remote connection, but how do we make the code in our local reposit
 - `pull` - Downloads commits, files, and refs, and immediately merges them into your local branch. This is a convenient way to integrate changes from a remote repository into your local repository in one step.
 - `push` - Uploads your local commits to a remote repository. This is how you share your changes with other developers.
 
-At the moment, our remote repository is empty, so we need to "push" our local commits to the remote repository.
-We can do this with the `git push` command:
+Let's use `git pull` to retrieve the latest changes from the remote repository:
 
 ```bash
-git push
+git pull
 ```
 
 ```output
-$ git push
-Enumerating objects: 29, done.
-Counting objects: 100% (29/29), done.
-Delta compression using up to 12 threads
-Compressing objects: 100% (22/22), done.
-Writing objects: 100% (29/29), 2.61 KiB | 534.00 KiB/s, done.
-Total 29 (delta 5), reused 0 (delta 0), pack-reused 0 (from 0)
-remote: Resolving deltas: 100% (5/5), done.
-To https://github.com/<username>/recipes.git
- * [new branch]      main -> main
-branch 'main' set up to track 'origin/main'.
+$ git pull
+remote: Enumerating objects: 3, done.
+remote: Counting objects: 100% (3/3), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (3/3), 2.74 KiB | 701.00 KiB/s, done.
+From <REPOSITORY-URL>
+ * [new branch]      main       -> origin/main
+There is no tracking information for the current branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details.
+
+    git pull <remote> <branch>
+
+If you wish to set tracking information for this branch you can do so with:
+
+    git branch --set-upstream-to=origin/<branch> main
 ```
 
-If you now go back to the repository and refresh the page, you should see your commits there!
+So what happened? As we might have seen in previous sections, git isn't always clever, or at least it isn't willing to make assumptions about what we want to do. In this case, git is saying that it pulled down changes from the remote repository, but it doesn't know what to do with them. This is because our local `main` branch isn't set up to track the `main` branch on the `origin` remote.
 
-Feel free to explore the remote repository a bit.
-You should be able to use the web interface to view the individual files, view the commit history, and even edit files directly in the browser.
-
-There's one thing missing though - the `yaml-format` branch that we made in the previous episode isn't on the remote repository.
-Why?
-When we pushed our local commits to the remote repository, we only pushed the `main` branch.
-You can see this specifically in the output of the `git push` command above, where it says `* [new branch]      main -> main`.
-Git is being a little cautious here, and will not push branches that don't exist on the remote repository unless we explicitly tell it to do so.
-
-Let's push the `yaml-format` branch to the remote repository:
+We can use the suggested command to set up the tracking information:
 
 ```bash
-git switch yaml-format
-git push
+git branch --set-upstream-to=origin/main main
 ```
 
-::: callout
-
-Depending on the version of git you are using, you may get an error message that says something like:
-
-```output
-fatal: The current branch yaml-format has no upstream branch.
-To push the current branch and set the remote as upstream, use
-
-    git push --set-upstream origin yaml-format
-```
-
-git is saying that the current branch doesn't have any information about where it should be pushed to in the remote repository.
-We can fix this by using the `--set-upstream` option to tell git where to push the current branch as indicated in the error message.
-
-:::
-
-::: callout
-
-The majority of the time, there is no reason why the branch on the remote repository should have a different name than the branch in your local repository.
-If you want git to always create a corresponding branch on the remote repository with the same name as your local branch, you can set the `push.autoSetupRemote` configuration option to `true`:
+This explicitly tells git that the local `main` branch is the same as the `main` branch on the `origin` remote. Now, if we run `git pull` again, git will know what to do:
 
 ```bash
-git config --global push.autoSetupRemote true
+git pull
 ```
-
-:::
 
 ::: callout
 
@@ -282,15 +190,12 @@ $ git remote show origin
   Fetch URL: <REPOSITORY-URL>
   Push  URL: <REPOSITORY-URL>
   HEAD branch: main
-  Remote branches:
-    main        tracked
-    yaml-format tracked
-  Local branches configured for 'git pull':
-    main        merges with remote main
-    yaml-format merges with remote yaml-format
-  Local refs configured for 'git push':
-    main        pushes to main        (up to date)
-    yaml-format pushes to yaml-format (up to date)
+  Remote branch:
+    main tracked
+  Local branch configured for 'git pull':
+    main merges with remote main
+  Local ref configured for 'git push':
+    main pushes to main (fast-forwardable)
 ```
 
 ::: callout
@@ -303,51 +208,16 @@ This might be used if, for instance, you have a central repository that you stor
 
 ## Pushing to Remote Repositories
 
-Let's make a change to our local repository and then push that change to the remote repository.
-Switch back to the main branch and let's edit the `guacamole.md` file.
-
-```bash
-git switch main
-nano guacamole.md
-```
-
-Add the following line to the end of the file:
-
-```
-* squeeze the juice of the lime into the bowl.
-```
-
-add and commit the change:
-
-```bash
-git add guacamole.md
-git commit -m "Extend guacamole recipe to include lime juice."
-```
-
-now let's run `git status` to see what the state of our local repository is:
+We pulled changes from the remote repository, but if we refresh the page on Gitlab, we won't see our local commits there. If we run the `git status` command we can see that git is aware that our local branch has some commits that aren't on the remote branch:
 
 ```output
 $ git status
 On branch main
-Your branch is ahead of 'origin/main' by 1 commit.
+Your branch is ahead of 'origin/main' by 9 commits.
   (use "git push" to publish your local commits)
 
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-        recipes/
-
-nothing added to commit but untracked files present (use "git add" to track)
+nothing to commit, working tree clean
 ```
-
-In addition to letting us know that we have untracked files, git is also telling us that our local branch is ahead of the remote branch by 1 commit.
-
-::: callout
-
-Remember that the remote is just a bookmark! Even though we made a commit, that commit only exists in our local repository.
-Likewise, if someone else made a commit to the remote repository, our local repository would not know about it until we fetched the changes from the remote repository.
-
-:::
-
 
 Let's use the `git push` command to upload our local commits to the remote repository:
 
@@ -357,16 +227,14 @@ git push
 
 ```output
 $ git push
-Enumerating objects: 5, done.
-Counting objects: 100% (5/5), done.
-Delta compression using up to 12 threads
-Compressing objects: 100% (3/3), done.
-Writing objects: 100% (3/3), 347 bytes | 347.00 KiB/s, done.
-Total 3 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
-remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+Enumerating objects: 28, done.
+Counting objects: 100% (28/28), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (21/21), done.
+Writing objects: 100% (27/27), 2.72 KiB | 696.00 KiB/s, done.
+Total 27 (delta 4), reused 0 (delta 0), pack-reused 0
 To <REPOSITORY-URL>
-   be7b91a..9b365ec  main -> main
-
+   5be9f46..0622c3a  main -> main
 ```
 
 If we now refresh the page on Gitlab, we should see our commits there!
@@ -491,47 +359,53 @@ git push --set-upstream origin bean-dip
 
 ## Fetching Remote Changes
 
-We've heard that it's a great idea to put information about our repository in the README file.
-Using the Web IDE of your remote repository, create a new file called "README.md" and add content like the following:
+We need to visit GitHub to make our edits directly on the `README.md` file using the web UI and commit the change.
 
-```markdown
-# Recipes Repository
-
-This repository contains a collection of recipes that I have collected over the years.
-We are using git to manage and collaborate on these recipes.
-```
-
-1. Now back in our local git repo, instead of running `git pull`, run `git fetch`.
-2. Next, run `git log --oneline --all` and pay attention to the branch pointers after each commit.
-3. Run `cat README.md`. What happens? Why?
-4. This time run `git pull` and then run `cat README.md` again. What happens now?
+Now back in our local git repo, we will first fetch the changes but not merge them yet, see what was fetched, compare both local and remote statuses, then finally pull the changes.
 
 How does `git fetch` differ from `git pull` based on what you observed?
 
 ::: hint
 
-Branches that start with `origin/` are remote tracking branches.
+You can use `git log --oneline --all` to see commits across all branches, including remote-tracking branches like `origin/main`.
 
 :::
 
 :::::::::::::::  solution
 
-When you run `git log --oneline --all`, you should see that we can see the new commit from the remote repository, but our local branch pointer is still at the previous commit. This is because `git fetch` only downloads the commits from the remote repository, but does not update our local branches.
-Our local repository is still at the previous commit, as indicated by the `HEAD -> main` pointer.
-
 ```bash
-$ git log --oneline --all
-fee8d0c (origin/main, origin/HEAD) Add initial README with repository information
-9b365ec (HEAD -> main) extend guacamole recipe to include lime juice.
+git fetch origin
+git status
+```
+```output
+On branch main
+Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+nothing to commit, working tree clean
 ```
 
+```bash
+git log --oneline --all
+```
 
+```output
+a4275da (origin/main, origin/HEAD) Change title in README.md
+4eef8f7 (HEAD -> main) Init commit
+b02715d Initial commit
+```
 
-When we run `cat README.md`, we are told that no such file exists.
-This is because the file is only present on the remote. We have pulled down the information about the new commit, but we have not yet updated our local branch.
+```bash
+git pull
+```
 
-When we run `git pull`, git will fetch the commits from the remote repository and then merge them into our local branch.
-After running `git pull`, if we run `cat README.md`, we should see the contents of the README file that we created in the remote repository.
+```output
+Updating 4eef8f7..a4275da
+Fast-forward
+ README.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+```
+
+`git fetch` pulls the updates from the remote, it does not move the local branches and leaves the remote branch updated (`origin/main`), while the local is not touched (`HEAD -> main`), as shown by the log. The `git pull` command executes fetch and merge at once.
 
 :::::::::::::::::::::::::
 
