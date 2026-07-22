@@ -156,12 +156,12 @@ git push --force origin mybranch
 
 ::: caution
 Force-pushing to a remote branch will invalidate any other copies of that branch in other people's working copies.
-This, it is usually a bad idea to force-push on branches actually worked on by others.
+Thus, it is usually a bad idea to force-push on branches actually worked on by others.
 In that case, just merge the changes with `git pull upstream main` creating a merge commit.
 :::
 
 ::: callout
-The reason why some people prefer the *rebase* over the *merge* is that it keeps the history cleaner.The merge commits
+The reason why some people prefer the *rebase* over the *merge* is that it keeps the history cleaner.
 It therefore remains a judgement call and will largely be influenced by the specific policies in place for the repositories of the projects you collaborate with.
 :::
 
