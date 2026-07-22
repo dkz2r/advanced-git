@@ -1,5 +1,5 @@
 ---
-title: ''
+title: 'Aliasing Commands'
 teaching: 10
 exercises: 2
 ---
