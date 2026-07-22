@@ -388,14 +388,14 @@ git-adv-09-forking: git-adv-06-tags
 git-adv-12-large-files: git-adv-09-forking
 	cd $(REPO_PATH)
 	git tag git-adv-12-large-files
-	git switch main
-	git lfs install
-	echo "This is a very large report." > report.pdf
-	git lfs track report.pdf
-	git add .gitattributes
-	git commit -m "Setup LFS tracking"
-	git add report.pdf
-	git commit -m "Add final report to the repository"
+# 	git switch main
+# 	git lfs install
+# 	echo "This is a very large report." > report.pdf
+# 	git lfs track report.pdf
+# 	git add .gitattributes
+# 	git commit -m "Setup LFS tracking"
+# 	git add report.pdf
+# 	git commit -m "Add final report to the repository"
 
 # 13-cherrypick: cherry-pick a commit from bean-dip into main
 git-adv-13-cherrypick: git-adv-12-large-files
