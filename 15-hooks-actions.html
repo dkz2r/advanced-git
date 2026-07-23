@@ -411,7 +411,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Hooks</h1>
-        <p>Last updated on 2026-07-15 |
+        <p>Last updated on 2026-07-23 |
 
         <a href="https://github.com/carpentries-incubator/advanced-git/edit/main/episodes/15-hooks-actions.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -449,25 +449,33 @@
 git. The scripts can be written in any language and do anything you
 like, so any executable script can be a hook.</p>
 <p>Git hooks can trigger events on the server side or locally, and
-commonly used hooks include: - <code>pre-commit</code>: Executed before
-the <code>git commit</code> command and is usually used to check the
-changes with linters or tests. - <code>prepare-commit-msg</code>:
-Executed before after the commit message is created, but before the
-commit message editor is started. Good for changing the default commit
-message programmatically before the user sees it. -
-<code>commit-msg</code>: Validates the commit message, can be used to
-check whether the commit message adheres to project policies -
+commonly used hooks include:</p>
+<ul><li>
+<code>pre-commit</code>: Executed before the <code>git commit</code>
+command and is usually used to check the changes with linters or
+tests.</li>
+<li>
+<code>prepare-commit-msg</code>: Executed before after the commit
+message is created, but before the commit message editor is started.
+Good for changing the default commit message programmatically before the
+user sees it.</li>
+<li>
+<code>commit-msg</code>: Validates the commit message, can be used
+to check whether the commit message adheres to project policies</li>
+<li>
 <code>post-commit</code>: Runs after the commit, often used for
-notifications or logging. - <code>pre-receive</code>: Server-side hook,
-which runs before a push is accepted, commonly used to enforce project
-policies</p>
-<p>Examples of local events that can trigger hooks include
+notifications or logging.</li>
+<li>
+<code>pre-receive</code>: Server-side hook, which runs before a push
+is accepted, commonly used to enforce project policies</li>
+</ul><p>Examples of local events that can trigger hooks include
 <code>commit</code> (pre- or post-commit hooks), <code>checkout</code>
 or <code>rebase</code>. Pre-commit hooks are perhaps the most common and
 useful ones: they trigger actions before the code is committed and if
 the hook script fails, then the command is aborted. This can be very
 powerful - you can automatically run linters, before the code is even
 committed.</p>
+
 <p>List of pre-written pre-commit hooks: <a href="https://github.com/pre-commit/pre-commit-hooks" class="external-link uri">https://github.com/pre-commit/pre-commit-hooks</a></p>
 <p>The executable files are stored in the <code>.git/hooks/</code>
 directory in your project directory. A pre-commit hooks will be an
@@ -476,17 +484,17 @@ executable file in this directory stored with the magic name
 examples.</p>
 <p>Before creating the hook, make sure <code>flake8</code> is installed
 in your environment:</p>
-<div class="codewrapper sourceCode" id="cb1">
+<div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a><span class="ex">pip</span> install flake8</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="ex">pip</span> install flake8</span></code></pre>
 </div>
 <p>Now, let’s create the hook:</p>
-<div class="codewrapper sourceCode" id="cb2">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="fu">touch</span> .git/hooks/pre-commit</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1" aria-label="code-block-2-2"></a><span class="fu">nano</span> .git/hooks/pre-commit</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a><span class="fu">touch</span> .git/hooks/pre-commit</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1" aria-label="code-block-7-2"></a><span class="fu">nano</span> .git/hooks/pre-commit</span></code></pre>
 </div>
 <p>And add the following text to it:</p>
 <pre><code>#!/usr/bin/env bash
@@ -495,24 +503,24 @@ set -eo pipefail
 flake8 hello.py
 echo "flake8 passed!"</code></pre>
 <p>Now let’s make <code>hello.py</code>:</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a><span class="fu">touch</span> hello.py</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1" aria-label="code-block-4-2"></a><span class="fu">nano</span> hello.py</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1" aria-label="code-block-9-1"></a><span class="fu">touch</span> hello.py</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1" aria-label="code-block-9-2"></a><span class="fu">nano</span> hello.py</span></code></pre>
 </div>
 <p>Make the hook file executable, otherwise Git will silently ignore
 it:</p>
-<div class="codewrapper sourceCode" id="cb5">
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1" aria-label="code-block-5-1"></a><span class="fu">chmod</span> +x .git/hooks/pre-commit</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1" aria-label="code-block-10-1"></a><span class="fu">chmod</span> +x .git/hooks/pre-commit</span></code></pre>
 </div>
 <p>And add some text to it:</p>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1" aria-label="code-block-6-1"></a><span class="bu">print</span>(<span class="st">'Hello world!'')</span></span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1" aria-label="code-block-11-1"></a><span class="bu">print</span>(<span class="st">'Hello world!'')</span></span></code></pre>
 </div>
 <p>The typo is on purpose. Add and commit it to the repository.</p>
 <div id="challenge-1-enforcing-commit-message-format-with-a-hook" class="callout challenge">
@@ -560,10 +568,10 @@ that file: <code>cat "$1"</code></p>
 <div class="accordion-body">
 <p>You can use <code>grep</code> with regex to check the message format.
 For example:</p>
-<div class="codewrapper sourceCode" id="cb7">
+<div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1" aria-label="code-block-7-1"></a><span class="fu">grep</span> <span class="at">-qE</span> <span class="st">"^(feat|fix|docs):"</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" tabindex="-1" aria-label="code-block-12-1"></a><span class="fu">grep</span> <span class="at">-qE</span> <span class="st">"^(feat|fix|docs):"</span></span></code></pre>
 </div>
 <p><code>-q</code> runs grep quietly (no output), <code>-E</code>
 enables extended regex, and <code>^(feat|fix|docs):</code> matches lines
@@ -581,40 +589,40 @@ commit is aborted. So <code>exit 1</code> rejects the commit.</p>
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb8">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1" aria-label="code-block-8-1"></a><span class="fu">nano</span> .git/hooks/commit-msg</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1" aria-label="code-block-13-1"></a><span class="fu">nano</span> .git/hooks/commit-msg</span></code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1" aria-label="code-block-9-1"></a><span class="va">commit_msg</span><span class="op">=</span><span class="va">$(</span><span class="fu">cat</span> <span class="st">"</span><span class="va">$1</span><span class="st">"</span><span class="va">)</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1" aria-label="code-block-9-2"></a></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1" aria-label="code-block-9-3"></a><span class="cf">if</span> <span class="ot">! </span><span class="bu">echo</span> <span class="st">"</span><span class="va">$commit_msg</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-qE</span> <span class="st">"^(feat|fix|docs):"</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1" aria-label="code-block-9-4"></a>    <span class="bu">echo</span> <span class="st">"ERROR: Commit message must start with 'feat:', 'fix:' or 'docs:'"</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1" aria-label="code-block-9-5"></a>    <span class="bu">exit</span> 1</span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1" aria-label="code-block-9-6"></a><span class="cf">fi</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" tabindex="-1" aria-label="code-block-14-1"></a><span class="va">commit_msg</span><span class="op">=</span><span class="va">$(</span><span class="fu">cat</span> <span class="st">"</span><span class="va">$1</span><span class="st">"</span><span class="va">)</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1" aria-label="code-block-14-2"></a></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1" aria-label="code-block-14-3"></a><span class="cf">if</span> <span class="ot">! </span><span class="bu">echo</span> <span class="st">"</span><span class="va">$commit_msg</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-qE</span> <span class="st">"^(feat|fix|docs):"</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1" aria-label="code-block-14-4"></a>    <span class="bu">echo</span> <span class="st">"ERROR: Commit message must start with 'feat:', 'fix:' or 'docs:'"</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1" aria-label="code-block-14-5"></a>    <span class="bu">exit</span> 1</span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1" aria-label="code-block-14-6"></a><span class="cf">fi</span></span></code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb10">
+<div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1" aria-label="code-block-10-1"></a><span class="fu">chmod</span> +x .git/hooks/commit-msg</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1" aria-label="code-block-15-1"></a><span class="fu">chmod</span> +x .git/hooks/commit-msg</span></code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb11">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1" aria-label="code-block-11-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"updated stuff"</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" tabindex="-1" aria-label="code-block-16-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"updated stuff"</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>ERROR: Commit message must start with 'feat:', 'fix:' or 'docs:'</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" tabindex="-1" aria-label="code-block-13-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"feat: add test file"</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" tabindex="-1" aria-label="code-block-18-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"feat: add test file"</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -706,9 +714,9 @@ before changes are committed</li>
   "creativeWorkStatus": "active",
   "url": "https://carpentries-incubator.github.io/advanced-git/15-hooks-actions.html",
   "identifier": "https://carpentries-incubator.github.io/advanced-git/15-hooks-actions.html",
-  "dateCreated": "2026-07-22",
-  "dateModified": "2026-07-15",
-  "datePublished": "2026-07-22"
+  "dateCreated": "2026-07-23",
+  "dateModified": "2026-07-23",
+  "datePublished": "2026-07-23"
 }
 
   </script><script>

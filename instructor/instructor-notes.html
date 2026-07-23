@@ -724,7 +724,42 @@ to discard them you can recover by switching back to your branch:</p>
 <hr class="half-width"></section><section id="14-squash-rebase"><h2 class="section-heading"><a href="14-squash-rebase.html">Interactive Rebase and Squash</a></h2>
 <hr class="half-width"></section><section id="command-alias"><h2 class="section-heading"><a href="command-alias.html">Aliasing Commands</a></h2>
 <hr class="half-width"></section><section id="15-hooks-actions"><h2 class="section-heading"><a href="15-hooks-actions.html">Hooks</a></h2>
-<hr class="half-width"></section><section id="16-tools"><h2 class="section-heading"><a href="16-tools.html">Setting up the Command Prompt</a></h2>
+<hr class="half-width">
+<h3 id="15-hooks-actions-headingInstructor1">
+<a href="15-hooks-actions.html#headingInstructor1">Instructor Note</a><a class="anchor" aria-label="anchor" href="#15-hooks-actions-headingInstructor1"></a>
+</h3>
+<p>Install Pre-Commit Hooks</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1" aria-label="code-block-1-1"></a>python <span class="op">-</span>m pip install pre<span class="op">-</span>commit</span></code></pre>
+</div>
+<p>Check that it’s in the path:</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1" aria-label="code-block-2-1"></a><span class="ex">pre-commit</span> <span class="at">--version</span></span></code></pre>
+</div>
+<p>Creat a basic configuration file for pre-commit hooks:</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1" aria-label="code-block-3-1"></a><span class="ex">pre-commit</span> sample-config <span class="op">&gt;</span> .pre-commit-config.yaml</span></code></pre>
+</div>
+<p>Install pre-commit hooks:</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1" aria-label="code-block-4-1"></a><span class="ex">pre-commit</span> install</span></code></pre>
+</div>
+<p>Run pre-commit hooks on all files:</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1" aria-label="code-block-5-1"></a><span class="ex">pre-commit</span> run <span class="at">--all-files</span></span></code></pre>
+</div>
+<hr>
+<br></section><section id="16-tools"><h2 class="section-heading"><a href="16-tools.html">Setting up the Command Prompt</a></h2>
 <hr class="half-width"></section><section id="17-resources"><h2 class="section-heading"><a href="17-resources.html">Additional Resources</a></h2>
 <hr class="half-width"></section></section>
 </div>
@@ -775,9 +810,9 @@ to discard them you can recover by switching back to your branch:</p>
   "creativeWorkStatus": "active",
   "url": "https://carpentries-incubator.github.io/advanced-git/instructor/instructor-notes.html",
   "identifier": "https://carpentries-incubator.github.io/advanced-git/instructor/instructor-notes.html",
-  "dateCreated": "2026-07-22",
-  "dateModified": "2026-07-22",
-  "datePublished": "2026-07-22"
+  "dateCreated": "2026-07-23",
+  "dateModified": "2026-07-23",
+  "datePublished": "2026-07-23"
 }
 
   </script><script>
