@@ -40,23 +40,25 @@ rebase*.
 Let's set up a branch that contains multiple commits modifying the same file
 to demonstrate how to use an interactive rebase to clean up the history.
 
-We're going to make a series of commits to a particular branch, as though we were working on a feature. 
+We're going to make a series of commits to a particular branch, as though we were working on a feature.
 
 To start with, we'll add a new file...
 
 ```bash
-nano apple-pie.md
+git branch pie-recipes
+git switch pie-recipes
+nano cherry-pie.md
 ```
 
 ```markdown
-# Apple Pie
+# Cherry Pie
 ## Ingredients
 ## Instructions
 ```
 
 ```bash
-git add apple-pie.md
-git commit -m "Add Apple Pie recipe"
+git add cherry-pie.md
+git commit -m "Add Cherry Pie recipe"
 ```
 
 Then we'll add another file...
@@ -121,15 +123,15 @@ nano apple-pie.md
 ```
 
 ```markdown
-# Apple Pie
+# Cherry Pie
 ## Ingredients
-- apples
+- cherries
 ## Instructions
 ```
 
 ```bash
-git add apple-pie.md
-git commit -m "Add Ingredients to Apple Pie recipe"
+git add cherry-pie.md
+git commit -m "Add Ingredients to Cherry Pie recipe"
 ```
 
 ### Performing an Interactive Rebase
@@ -321,7 +323,7 @@ fde1722 Add Apple Pie recipe
 
 ## Important Notes about Rebase!
 
-As with the standard rebase, the interactive rebase does also re-write the history of a branch. This means that if other people are working on that branch, it will be a real mess if anyone else makes commits and tries to push before you push your rebased commits. 
+As with the standard rebase, the interactive rebase does also re-write the history of a branch. This means that if other people are working on that branch, it will be a real mess if anyone else makes commits and tries to push before you push your rebased commits.
 
 Generally, interactive rebase is something that is reserved for your local branches, where you are working on something independently. It's a way of cleaning up your history before you ask someone else to review your branch.
 
