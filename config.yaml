@@ -71,7 +71,6 @@ episodes:
 - 03-remote.md
 - 04-undo.md
 - 05-merging.md
-- 05a-rebase.md
 - 06-tags.md
 - 07-branching-models.md
 - 09-forking.md
@@ -79,7 +78,6 @@ episodes:
 - 12-large-files.md
 - 13-cherrypick.md
 - 14-squash-rebase.md
-- command-alias.md
 - 15-hooks-actions.md
 - 16-tools.md
 - 17-resources.md
