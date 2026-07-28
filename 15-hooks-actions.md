@@ -20,48 +20,17 @@ exercises: 0
 Git hooks are scripts that get run when a specific event occurs in git. The scripts can be written in any language and do anything you like, so any executable script can be a hook.
 
 Git hooks can trigger events on the server side or locally, and commonly used hooks include:
-
-- `pre-commit`: Executed before the `git commit` command and is usually used to check the changes with linters or tests.
+- `pre-commit`: Executed before the `git commit` command and is usually used to
+  check the changes with linters or tests.
 - `prepare-commit-msg`: Executed before after the commit message is created, but before the commit message editor is started. Good for changing the default commit message programmatically before the user sees it.
-- `commit-msg`: Validates the commit message, can be used to check whether the commit message adheres to project policies
-- `post-commit`: Runs after the commit, often used for notifications or logging.
-- `pre-receive`: Server-side hook, which runs before a push is accepted, commonly used to enforce project policies
+- `commit-msg`: Validates the commit message, can be used to check whether the
+  commit message adheres to project policies
+- `post-commit`: Runs after the commit, often used for notifications or
+  logging.
+- `pre-receive`: Server-side hook, which runs before a push is accepted,
+  commonly used to enforce project policies
 
 Examples of local events that can trigger hooks include `commit` (pre- or post-commit hooks), `checkout` or `rebase`. Pre-commit hooks are perhaps the most common and useful ones: they trigger actions before the code is committed and if the hook script fails, then the command is aborted. This can be very powerful - you can automatically run linters, before the code is even committed.
-
-::: instructor
-
-Install Pre-Commit Hooks
-
-```python
-python -m pip install pre-commit
-```
-
-Check that it's in the path:
-
-```bash
-pre-commit --version
-```
-
-Creat a basic configuration file for pre-commit hooks:
-
-```bash
-pre-commit sample-config > .pre-commit-config.yaml
-```
-
-Install pre-commit hooks:
-
-```bash
-pre-commit install
-```
-
-Run pre-commit hooks on all files:
-
-```bash
-pre-commit run --all-files
-```
-
-:::
 
 List of pre-written pre-commit hooks: https://github.com/pre-commit/pre-commit-hooks
 

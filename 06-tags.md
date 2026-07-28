@@ -99,96 +99,20 @@ git log --oneline
 ```
 
 ```bash
-git tag -a 0.1.0 <commit-hash> -m "Started Bread Recipes"
+git tag -a 3.0.0 <commit-hash> -m "Reformat recipe to use YAML"
 
 git log --oneline --decorate
 ```
 ```output
-$ git log --oneline --decorate -n 10
-3a8e5c5 (HEAD -> main, tag: 1.0.0, finish-pie-recipe) Add instructions to apple pie recipe.
-ea212e8 Resolve merge conflict in salsa.md.
-339cc33 Modify salsa instructions to include cilantro and lime juice.
-4600586 (modify-salsa-instructions) Modify salsa instructions to include lime juice and salt.
-9d204cb Merge salsa-instructions branch into main.
-39725dd (pie-recipes) Add apple pie recipe
-810f4e6 (salsa-instructions) Add instructions to salsa recipe.
-e4f3d2a Add tomato soup recipe
-6290ad8 (tag: 0.1.0) Add bread recipe templates
-c0f9626 Add initial README with repository information
+<commit-hash> (HEAD -> main, tag: 3.0.0) Reformat recipe to use YAML
 ```
 
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::: challenge
-
-## Challenge: Use a Tag to View the Repository at a Past State
-
-Since tags are sort of like bookmarks, we can use them the same way we use hashes or relative references.
-
-Using the tag we just made ("0.1.0"), what command would you use to see all changes that have been made to the repository since that tag was created? (i.e. the "diff" between the tag and the current state of the repository.)
-
-What about getting a list of all commit messages that have been made since that tag was created?
-
-::: hint
-
-`git diff` can accept a tag name as an argument, just like it can accept a commit hash or a branch name.
-
-:::
-
-::: hint
-
-`git log` can accept a tag name as an argument, but this only shows commits *until* that tag.
-
-It can also accept a range of commits, using the form `git log <from>..<to>`...
-
-:::
-
-:::::::::::::::: solution
-
-To view the changes made since the tag was created, you can use:
-
-```bash
-git diff 0.1.0
-```
-
-For a list of all commit messages since that tag was created, you can use:
-
-```bash
-git log 0.1.0..HEAD --oneline
-```
-
-:::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::: challenge
-
-## Challenge: Detached HEAD state
-
-We can use a tag to view the repository at a past state, however "checking out" a tag doesn't create a new branch, it puts us into a "detached HEAD" state.
-
-Try the following command:
-
-```bash
-git checkout 0.1.0
-```
-
-1. Read the message that git prints to the terminal. What is the problem with being in a detached HEAD state?
-2. What do you think it means to be in a detached HEAD state?
-3. Do you see any changes in the console prompt? Try to make a commit. Do you notice anything different about the commit message?
-4. Return to the main branch using `git checkout main`. What happens?
 
 
-:::::::::::::::: solution
-
-1. The message says that you are in a detached HEAD state, and that although you can make commits, they will be "lost" when you switch branches. This is because you are not truly on a branch, but rather on a specific commit (the one that the tag points to).
-2. Being in a detached HEAD state means that the HEAD pointer (the current commit we are working on) is not pointing to a location on a branch, but rather to a specific commit. In a way, we are "off the tree" of our repository.
-3. The console prompt may change to indicate that you are in a detached state - at the end of the prompt, in place of the branch name, you might see the tag or hash in double parentheses. When you make a commit, the commit message will be created as usual, but it will specifically state that it is on a detached HEAD.
-4. When you return to the main branch using `git checkout main`, any commits you made in the detached HEAD state will not be part of the main branch. They will still exist in the repository, but they will be "orphaned" unless you create a new branch from them. Newer versions of git will provide a helpful message instructing you how to do this.
-
-:::::::::::::::::::::::::
-:::::::::::::::::::::::::::::::::::::::::::::::
 
 <!--- ![Merging 1](../fig/14-tags.png)--->
 

@@ -33,66 +33,47 @@ If there are no conflicts with the main branch, we can perform a "fast-forward" 
 by moving the branch pointer to the latest commit in the target branch. This is the default behaviour
 of `git merge` (when possible).
 
-Let's create a new branch `pie-recipes` and add a commit to it:
+Let's merge in our `yaml-format` branch back into `main` using a fast-forward merge:
 
 ```bash
-git branch pie-recipes
-git switch pie-recipes
-mkdir pies
-nano pies/apple-pie.md
-```
-
-```markdown
-# Apple Pie
-## Ingredients
-## Instructions
-```
-
-```bash
-git add pies/apple-pie.md
-git commit -m "Add apple pie recipe."
-```
-
-When we merge, we need to be on the branch that we want to merge into.
-At the moment, we are still on the `pie-recipes` branch, so let's switch back to the `main` branch and merge the changes from `pie-recipes`:
-
-```bash
-git switch main
-git merge pie-recipes
+git checkout main
+git merge yaml-format
 ```
 
 ```output
-$ git merge pie-recipes
-Updating 6c17573..75f4fca
+$ git merge yaml-format
+Updating ec240ab..68b09d0
 Fast-forward
- pies/apple-pie.md | 3 +++
- 1 file changed, 3 insertions(+)
- create mode 100644 pies/apple-pie.md
+ guacamole.md   | 7 -------
+ guacamole.yaml | 6 ++++++
+ 2 files changed, 6 insertions(+), 7 deletions(-)
+ delete mode 100644 guacamole.md
+ create mode 100644 guacamole.yaml
 ```
 
-If we look at the log, we can see that the commit that we made on the `pie-recipes` branch is now
+If we look at the log, we can see that the commits that we made on the `yaml-format` branch are now
 a part of the `main` branch:
 
 ```output
-$ git log --oneline --graph -n 5
-* 75f4fca (HEAD -> main, pie-recipes) Add apple pie recipe
-* 6c17573 Add tomato soup recipe
-* daaaaa7 Add bread recipe templates
-* 1fda23d Add initial README with repository information
-* 8a53062 Extend guacamole recipe to include lime juice.
+$ git log --oneline --graph
+68b09d0 (HEAD -> main, yaml-format) Rename recipe file to use .yaml extension.
+a2b55be Reformat recipe to use YAML.
+ec240ab Ignore png files and the pictures folder.
+20c856c Write prices for ingredients and their source
+11cdb65 Add some initial cakes
+7cdeaef Modify guacamole to the traditional recipe
+4b58094 Add ingredients for basic guacamole
+cdb0c21 Create initial structure for a Guacamole recipe
 ```
 
 ::: callout
 
-Note that our old branch is still there!
+Note that our old branch is stil there!
 
 ```output
 $ git branch -avv
-  bean-dip     68850ec Add bean dip recipe.
-* main         75f4fca Add apple pie recipe
-  pie-recipes  75f4fca Add apple pie recipe
-  soup-recipes 8dbd9fe Add tomato soup with basic ingredients
-  yaml-format  0bb0a0c Reformat recipe to use YAML.
+* main        68b09d0 Rename recipe file to use .yaml extension.
+  yaml-format 68b09d0 Rename recipe file to use .yaml extension.
 ```
 
 It's just that both branches now point to the same commit. Until we specifically delete the branch,
@@ -111,48 +92,48 @@ A non fast-forward merge makes a new commit that ties together the histories of 
 Let's make a new branch and add a commit to it:
 
 ```bash
-git branch salsa-instructions
-git switch salsa-instructions
-nano salsa.md
+git branch add-instructions
+git switch add-instructions
+nano guacamole.yaml
 ```
 
 ```yaml
-instructions:
-  1. Dice tomatoes and onions.
-  2. Mix together in a bowl.
+instructions: |
+  1. Cut avocados in half and remove pit.
+  2. Make guacamole.
 ```
 
 ```bash
-git add salsa.md
-git commit -m "Add instructions to salsa recipe."
+git add guacamole.yaml
+git commit -m "Add instructions to guacamole recipe."
 ```
 
-Now, let's move back to the main branch and merge the changes from the `salsa-instructions` branch
+Now, let's move back to the main branch and merge the changes from the `add-instructions` branch
 using a non-fast-forward merge:
 
 ```bash
 git switch main
-git merge --no-ff salsa-instructions -m "Merge salsa-instructions branch into main."
+git merge --no-ff add-instructions -m "Merge add-instructions branch into main."
 ```
 
 ```output
-$ git merge --no-ff salsa-instructions -m "Merge salsa-instructions branch into main."
+$ git merge --no-ff add-instructions -m "Merge add-instructions branch into main."
 Merge made by the 'ort' strategy.
- salsa.md | 2 ++
- 1 file changed, 2 insertions(+)
+ guacamole.yaml | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 ```
 
 Let's look at the log to see what happened:
 
 ```output
-$ git log --oneline --graph -n 5
-*   381314b (HEAD -> main) Merge salsa-instructions branch into main.
+$ git log --oneline --graph
+$ git log --oneline --graph
+*   a20b39f (HEAD -> main) Merge add-instructions branch into main.
 |\
-| * 3572596 (salsa-instructions) Add instructions to the salsa recipe
+| * 22e4eb6 (add-instructions) Add instructions to guacamole recipe.
 |/
-* 75f4fca (pie-recipes) Add apple pie recipe
-* 6c17573 Add tomato soup recipe
-* daaaaa7 Add bread recipe templates
+* 68b09d0 (yaml-format) Rename recipe file to use .yaml extension.
+* a2b55be Reformat recipe to use YAML.
 ```
 
 The `--no-ff` flag causes the merge to always create a new commit object, even if the merge could
@@ -162,66 +143,65 @@ a feature branch and groups together all commits that together added the feature
 ## Merge Conflicts
 
 When merging branches, it's not uncommon to encounter a "merge conflict". This happens when the
-same part of the same file has been modified in both the source and target branches. In these cases,
+same part of the same has been modified in both the source and target branches. In these cases,
 git will pause the merge and ask you to resolve the conflict manually.
 
 Let's create a conflict by modifying the same line in both branches.
 
 ```bash
 git switch main
-git branch modify-salsa-instructions
-git switch modify-salsa-instructions
-nano salsa.md
+git branch modify-guac-instructions
+git switch modify-guac-instructions
+nano guacamole.yaml
 ```
 
 And let's change the final step to something more informative:
 
-```markdown
-instructions:
-  1. Dice tomatoes and onions.
-  2. Mix together in a bowl.
-  3. Add lime juice and salt to taste.
+```yaml
+instructions: |
+  1. Cut avocados in half and remove pit.
+  2. Slice the avocados and mash them with a fork.
 ```
 
 Commit the change:
 
 ```bash
-git add salsa.md
-git commit -m "Modify salsa instructions to include lime juice and salt."
+git add guacamole.yaml
+git commit -m "Modify guacamole instructions to include mashing."
 ```
 
-Now, let's switch back to the `main` branch and modify the same file differently:
+Now, let's switch back to the `main` branch and modify the same line differently:
 
 ```bash
 git switch main
-nano salsa.md
+nano guacamole.yaml
 ```
 
-Change the final step in `salsa.md` to:
-```markdown
-instructions:
-  1. Dice tomatoes and onions.
-  2. Mix together in a bowl.
-  3. Add cilantro and lime juice to taste.
+Change the final step to:
+
+```yaml
+instructions: |
+  1. Cut avocados in half and remove pit.
+  2. Use a food processor to blend the avocados.
 ```
 
 Commit the change:
 
 ```bash
-git add salsa.md
-git commit -m "Modify salsa instructions to include cilantro and lime juice."
+git add guacamole.yaml
+git commit -m "Modify guacamole instructions to include food processor."
 ```
 
-Now, let's try to merge the `modify-salsa-instructions` branch into `main`:
+Now, let's try to merge the `modify-guac-instructions` branch into `main`:
 
 ```bash
-git merge modify-salsa-instructions
+git merge modify-guac-instructions
 ```
 
 ```output
-$ git merge modify-salsa-instructions
-Auto-merging salsa.md
-CONFLICT (content): Merge conflict in salsa.md
+$ git merge modify-guac-instructions
+Auto-merging guacamole.yaml
+CONFLICT (content): Merge conflict in guacamole.yaml
 Automatic merge failed; fix conflicts and then commit the result.
 ```
 
@@ -229,25 +209,30 @@ In addition to this message, our branch name in the terminal prompt may also be 
 `(main|MERGING)` to indicate that we are in the middle of a merge, and not in the normal flow of
 git operations.
 
-Git has marked the conflict in the `salsa.md` file. Let's open it to see what happened:
+Git has marked the conflict in the `guacamole.yaml` file. Let's open it to see what happened:
 
 ```
-$ cat salsa.md
-# Salsa
-## Ingredients
-## Instructions
-  1. Dice tomatoes and onions
-  2. Mix together in a bowl
-'<<<<<<< HEAD
-  3. Add cilantro and lime juice to taste.
+nano guacamole.yaml
+```
+
+```yaml
+name: Guacamole
+ingredients:
+  avocado: 1.35
+  lime: 0.64
+  salt: 2
+instructions: |
+  1. Cut avocados in half and remove pit.
+<<<<<< HEAD
+  2. Use a food processor to blend the avocados.
 =======
-  3. Add lime juice and salt to taste
-'>>>>>>> modify-salsa-instructions
+  2. Slice the avocados and mash them with a fork.
+>>>>>> modify-guac-instructions
 ```
 
 The lines between `<<<<<< HEAD` and `=======` show the changes from the `main` branch, while the
-lines between `=======` and `>>>>>>> modify-salsa-instructions` show the changes from
-the `modify-salsa-instructions` branch.
+lines between `=======` and `>>>>>> modify-guac-instructions` show the changes from
+the `modify-guac-instructions` branch.
 
 There are tools and editors that can help you resolve merge conflicts, but at its core, all we need
 to do is decide which changes to keep. We can keep one side, the other side, or even combine
@@ -260,25 +245,28 @@ Upon saving the file, however, the merge is not yet complete. We need to stage t
 commit the merge:
 
 ```bash
-git add salsa.md
-git commit -m "Resolve merge conflict in salsa.md."
+git add guacamole.yaml
+git commit -m "Resolve merge conflict in guacamole.yaml."
 ```
 
 We can see the branch / merge process in our log:
 
+```bash
+git log --oneline --graph
+```
+
 ```output
-$ git log --oneline --graph -n 7
-*   cb3c272 (HEAD -> main) Resolve merge conflict in salsa.md.
+$ git log --oneline --graph
+*   a94e041 (HEAD -> main) Resolve merge conflict in guacamole.yaml.
 |\
-| * 54f4518 (modify-salsa-instructions) Modify salsa instructions to include lime juice and salt.
-* | 9a8d10a Modify salsa instructions to include cilantro and lime juice.
+| * 21be5b1 (modify-guac-instructions) Modify guacamole instructions mashing.
+* | c6ae196 Modify guacamole instructions to include food processor.
 |/
-*   381314b Merge add-instructions branch into main.
+*   d6ade9c Merge add-instructions branch into main.
 |\
-| * 3572596 (add-instructions) Add instructions to the salsa recipe
+| * 4d1c414 (add-instructions) Add instructions to guacamole recipe.
 |/
-* 75f4fca (pie-recipes) Add apple pie recipe
-* 6c17573 (tag: git-adv-04-undo-exercise-01) Add tomato soup recipe
+* f36de20 (yaml-format) Rename recipe file to use .yaml extension.
 ...
 ```
 
@@ -286,29 +274,29 @@ $ git log --oneline --graph -n 7
 
 ## Exercise: Creating a fast-forward merge.
 
-Create a branch in your repository for finishing the apple pie recipe by adding instructions.
+Create a branch in your repository for finishing the guacamole recipe by adding instructions.
 Then, merge the branch back into `main` using a fast-forward merge.
 
 :::::::::::::::  solution
 
 ```bash
-git branch finish-pie-recipe
-git switch finish-pie-recipe
-nano pies/apple-pie.md
+git branch finish-guac-recipe
+git switch finish-guac-recipe
+nano guacamole.yaml
 ```
 
-```markdown
-# Instructions
-  1. Preheat oven to 350F.
-  2. Make the Pie
-  3. Bake for 45 minutes.
+```yaml
+instructions: |
+  1. Cut avocados in half and remove pit.
+  2. Mash avocados with a fork.
+  3. Add lime juice and salt to taste.
 ```
 
 ```bash
-git add pies/apple-pie.md
-git commit -m "Add instructions to apple pie recipe."
+git add guacamole.yaml
+git commit -m "Add instructions to guacamole recipe."
 git switch main
-git merge finish-pie-recipe
+git merge finish-guac-recipe
 ```
 
 :::::::::::::::::::::::::
@@ -329,22 +317,22 @@ This is free-form, so there is no single correct solution.
 
 ```bash
 git switch main
-nano pies.md
-git add pies/apple-pie.md
-git commit -m "Add ingredients to the apple pie recipe."
-git branch modify-apple-pie
-git switch modify-apple-pie
-nano pies/apple-pie.md
-git add pies/apple-pie.md
-git commit -m "Add basic ingredients to the apple pie recipe."
+nano salsa.md
+git add salsa.md
+git commit -m "Add initial salsa recipe."
+git branch modify-salsa
+git switch modify-salsa
+nano salsa.md
+git add salsa.md
+git commit -m "Modify salsa recipe to include tomatoes."
 git switch main
-nano pies/apple-pie.md
-git add pies/apple-pie.md
-git commit -m "Modify apple pie recipe to include additional ingredients."
-git merge modify-apple-pie
-# Resolve the conflict in pies/apple-pie.md
-git add pies/apple-pie.md
-git commit -m "Resolve merge conflict in pies/apple-pie.md."
+nano salsa.md
+git add salsa.md
+git commit -m "Modify salsa recipe to include onions."
+git merge modify-salsa
+# Resolve the conflict in salsa.md
+git add salsa.md
+git commit -m "Resolve merge conflict in salsa.md."
 ```
 
 :::::::::::::::::::::::::

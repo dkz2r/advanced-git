@@ -19,8 +19,6 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Interactive Rebase
-
 The process of getting a pull request or merge request accepted and merged into
 the upstream repository can require several updates to the original proposed
 changes.
@@ -35,143 +33,37 @@ clean up the history.
 Git provides a command to modify the history of a branch called an *interactive
 rebase*.
 
-### Setting up a situation to do a rebase
-
-Let's set up a branch that contains multiple commits modifying the same file
+We've set up a branch that contains multiple commits modifying the same file
 to demonstrate how to use an interactive rebase to clean up the history.
-
-We're going to make a series of commits to a particular branch, as though we were working on a feature.
-
-To start with, we'll add a new file...
-
-```bash
-git branch pie-recipes
-git switch pie-recipes
-nano cherry-pie.md
-```
-
-```markdown
-# Cherry Pie
-## Ingredients
-## Instructions
-```
-
-```bash
-git add cherry-pie.md
-git commit -m "Add Cherry Pie recipe"
-```
-
-Then we'll add another file...
-
-```bash
-nano pecan-pie.md
-```
-
-```markdown
-# Pecan Pie
-## Ingredients
-- pecens
-- sugar
-## Instructions
-```
-
-```bash
-git add pecan-pie.md
-git commit -m "Add Pecan Pie recipe with ingredients"
-```
-
-But we accidentally made a typo! We fix it in the next commit...
-
-```markdown
-# Pecan Pie
-## Ingredients
-- pecans <- Fix the typo here
-- sugar
-## Instructions
-```
-
-```bash
-git add pecan-pie.md
-git commit -m "Fix typo in ingredients"
-```
-
-And finally we edit that same file again...
-
-```bash
-nano pecan-pie.md
-```
-
-```markdown
-# Pecan Pie
-## Ingredients
-- pecans
-- sugar
-## Instructions
-- Preheat the oven
-```
-
-```bash
-git add pecan-pie.md
-git commit -m "Additional nstructions to pecan pie recipe."
-```
-
-Then we'll go back and edit our first file...
-
-
-```bash
-nano apple-pie.md
-```
-
-```markdown
-# Cherry Pie
-## Ingredients
-- cherries
-## Instructions
-```
-
-```bash
-git add cherry-pie.md
-git commit -m "Add Ingredients to Cherry Pie recipe"
-```
-
-### Performing an Interactive Rebase
 
 Let's first look at the history of our branch
 
 ```bash
-git log --oneline pie-recipes -n 6
+git switch pie-recipes
+git log --oneline pie-recipes
 ```
-
 ```output
-$ git log --oneline pie-recipes -n 6
-b9797c6 (HEAD -> pie-recipes) Add ingredients to Apple Pie recipe
-3aac6a9 Additional nstructions to pecan pie recipe.
-868e4f3 Fix type in pecan pie ingredients
-6c19e85 Add Pecan Pie recipe with ingredients.
-fde1722 Add Apple Pie recipe
-460c628 Add bean dip ingredients to groceries
-66cbdd6 Add final cookbook to the repository
+7c77bba (HEAD -> pie-recipes, origin/pie-recipes) Complete pecan pie recipe instructions
+f203cce Additional instructions to pecan pie recipe
+c65036e Fix typo in ingredients
+8613dde Add recipe for Pecan Pie with ingredients
+3f40052 Add Apple Pie recipe
+9761864 Initial commit with recipe files
+
 ```
 
-We're ready to add our changes back into the main branch, but we want our merge request to be tidier. There's a couple things we notice:
-
-1. There's two commits one right after the other where we add a pecan pie recipe, and then immediately notice and fix a typo. This can be one commit.
-2. We added the apple pie recipe, then much later we added the ingredients. Maybe these commits should be next to each other?
-
-For cleaning up the history we want to focus on the first 4 commit of the branch. We call the "rebase" command we talked about earlier, but this time instead of specifying a different branch, we say that we want to rebase onto the commit five commits being our current HEAD. We also add a flag `-i`, saying that we want this to be an "interactive rebase":
+For cleaning up the history we focus on the first 4 commit of the branch.
 
 ```bash
-git rebase -i HEAD~5
+git rebase -i HEAD~4
 ```
 
-Git will open an editor with a list of the requested commits that looks something like this:
-
+Git will open an editor with a list of the requested commits in the format
 ```output
-pick fde1722 Add Apple Pie recipe
-pick 6c19e85 Add Pecan Pie recipe with ingredients.
-pick 868e4f3 Fix typo in pecan pie ingredients
-pick 3aac6a9 Additional nstructions to pecan pie recipe.
-pick b9797c6 Add ingredients to Apple Pie recipe
+pick 5df0b61 Add recipe for Pecan Pie with ingredients
+pick f34d3e0 Fix typo in ingredients
+pick 80e1e0b Additional instructions to pecan pie recipe
+pick 376a80c Complete pecan pie recipe instructions
 
 # Rebase deeb7a6..376a80c onto deeb7a6 (4 commands)
 #
@@ -202,11 +94,9 @@ pick b9797c6 Add ingredients to Apple Pie recipe
 #
 ```
 
-Everything in the bottom part of the editor (all the lines that start with "#") are ignored. What we really care about are the lines at the top with our commits. Each line contains a command, followed by the commit hash for that commit, and finally the message that commit was made with.
-
-In order to make our changes to our commits, we need to modify the commands in front of the hashes to specify what it is we want to do with each commit.
-
-Git provides different options for `<cmd>` to modify the specific commit. Below you find a selection of commands that are most often used in basic interactive rebasing.
+Git provides different options for `<cmd>` to modify the specific
+commit. Below you find a selection of commands that are most often used in
+basic interactive rebasing.
 
 - **pick**: Use this commit
 - **reword**: Use this commit, but adapt the commit message
@@ -216,135 +106,125 @@ Git provides different options for `<cmd>` to modify the specific commit. Below 
 - **fixup**: Like squash, but keep only a single commit message
 - **drop**: Remove commit
 
-Initially all commits are listed with **pick**, as this would recreate the same state as before the interactive rebase was started.
-You are now free to change the order of those commits as long as dependencies are retained.
+Initially all commits are listed with **pick**, as this would recreate the same
+state as before the interactive rebase was started.
+You are now free to change the order of those commits as long as dependencies
+are retained.
 
-The first thing we want to do is combine those two commits for the Pecan Pie recipe, where we noticed a typo right away. We can use the "fixup" command, which combines the changes made in the specific commit with the previous commit, keeping the commit message from the previous commit:
-
-```output
-pick fde1722 Add Apple Pie recipe
-pick 6c19e85 Add Pecan Pie recipe with ingredients.
-fixup 868e4f3 Fix typo in pecan pie ingredients
-pick 3aac6a9 Additional nstructions to pecan pie recipe.
-pick b9797c6 Add ingredients to Apple Pie recipe
-```
-
-We also notice that we made a typo in that previous commit! We can fix that as long as we're here by setting that commit to "reword":
+In our example before, we could reorder and squash to keep two commits
+regarding Pecan Pie.
 
 ```output
-pick fde1722 Add Apple Pie recipe
-pick 6c19e85 Add Pecan Pie recipe with ingredients.
-fixup 868e4f3 Fix typo in pecan pie ingredients
-reword 3aac6a9 Additional nstructions to pecan pie recipe.
-pick b9797c6 Add ingredients to Apple Pie recipe
+pick 8613dde Add recipe for Pecan Pie with ingredients
+fixup c65036e Fix typo in ingredients
+pick f203cce Additional instructions to pecan pie recipe
+pick 7c77bba Complete pecan pie recipe instructions
 ```
 
-Now we save this file and exit. Git will start to perform the rebase, stopping at the commit we said we wanted to "reword" to let us modify the commit message, as though we were performing a `git commit --amend`.
-
+Now save this list and let Git apply the desired changes.
 After the rebase is complete, you can look at the rewritten history.
 
 ```bash
-$ git log --oneline pie-recipes -n 8
-6b1cb35 (HEAD -> pie-recipes) Add ingredients to Apple Pie recipe
-4a15cec Additional instructions to pecan pie recipe.
-aab2fe8 Add Pecan Pie recipe with ingredients.
-fde1722 Add Apple Pie recipe
-460c628 (origin/main, origin/HEAD, main) Add bean dip ingredients to groceries
-66cbdd6 Add final report to the repository
+git log --oneline pie-recipes
+```
+```output
+a03a64c (HEAD -> pie-recipes) Complete pecan pie recipe instructions
+6c4a44a Additional instructions to pecan pie recipe
+cf155bb Add recipe for Pecan Pie with ingredients
+deeb7a6 Add Apple Pie recipe
+e4b2098 Initial commit with recipe files
+
 ```
 
-The typo commit has been removed! Let's take a look at that specific commit now:
+As we have changed the history, the branch at *origin* has diverged from the
+local branch.
+This will be noted in the current status of repository.
+
+```
+git status
+```
+```output
+On branch pie-recipes
+Your branch and 'origin/pie-recipes' have diverged,
+and have 3 and 4 different commits each, respectively.
+  (use "git pull" to merge the remote branch into yours)
+
+nothing to commit, working tree clean
+```
+
+As this is the last step before final check and merge, it should be safe to
+force-push the changes to *origin*.
 
 ```bash
-$ git show aab2fe8
-commit aab2fe89ee418c40c6bb487741e50ff32a477e21
-Author: Jonathan Hartman <hartman@itc.rwth-aachen.de>
-Date:   Wed Jul 22 06:51:19 2026 +0200
-
-    Add Pecan Pie recipe with ingredients.
-
-diff --git a/pecan-pie.md b/pecan-pie.md
-new file mode 100644
-index 0000000..c0ca146
---- /dev/null
-+++ b/pecan-pie.md
-@@ -0,0 +1,5 @@
-+# Pecan Pie
-+## Ingredients
-+- pecans
-+- sugar
-+## Instructions
+git push --force origin
 ```
-
-As far as anyone is concerned, that typo and the commit fixing it never happened. Both changes are now "squashed" together into the same commit.
-
-### Reordering Commits
-
-We aren't just limited to the commands listed in a rebase however! Since a rebase is just "replaying" the commits on top of the specified commit, we can use the interactive rebase to put the commits back in with any order.
-
-Let's look at our log again:
-
-```bash
-$ git log --oneline pie-recipes -n 8
-6b1cb35 (HEAD -> pie-recipes) Add ingredients to Apple Pie recipe
-4a15cec Additional instructions to pecan pie recipe.
-aab2fe8 Add Pecan Pie recipe with ingredients.
-fde1722 Add Apple Pie recipe
-460c628 (origin/main, origin/HEAD, main) Add bean dip ingredients to groceries
-66cbdd6 Add final report to the repository
+```output
+Enumerating objects: 15, done.
+Counting objects: 100% (15/15), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (12/12), done.
+Writing objects: 100% (12/12), 1.29 KiB | 1.29 MiB/s, done.
+Total 12 (delta 5), reused 0 (delta 0), pack-reused 0
+remote:
+remote: To create a merge request for pie-recipes, visit:
+remote:   https://gitlab.git.nrw/hartman/git-workshop-practice/-/merge_requests/new?merge_request%5Bsource_branch%5D=pie-recipes
+remote:
+To https://gitlab.git.nrw/hartman/git-workshop-practice.git
+ + 7c77bba...062addc pie-recipes -> pie-recipes (forced update)
 ```
-
-Looking at the commits related to Apple Pie, there is the initial commit where we add the recipe, then several commits later we finally get around to adding ingredients. Let's move these commits so that they come one after the other:
-
-```bash
-git rebase -i HEAD~4
-```
-
-```bash
-pick fde1722 Add Apple Pie recipe
-pick 6b1cb35 Add ingredients to Apple Pie recipe
-pick aab2fe8 Add Pecan Pie recipe with ingredients.
-pick 4a15cec Additional instructions to pecan pie recipe.
-```
-
-In this case, I've moved the entire line with the commit "Add ingredients to Apple Pie recipe" two lines up, so that it comes right after the commit where we start the apple pie recipe.
-
-Save the file and let git do complete the rebase.
-
-Looking at our log again, we can see that the commit did in fact move:
-
-```bash
-$ git log --oneline pie-recipes -n 4
-4a18d1d (HEAD -> pie-recipes) Additional instructions to pecan pie recipe.
-b5ce1bd Add Pecan Pie recipe with ingredients.
-f90ca38 Add ingredients to Apple Pie recipe
-fde1722 Add Apple Pie recipe
-```
-
-## Important Notes about Rebase!
-
-As with the standard rebase, the interactive rebase does also re-write the history of a branch. This means that if other people are working on that branch, it will be a real mess if anyone else makes commits and tries to push before you push your rebased commits.
-
-Generally, interactive rebase is something that is reserved for your local branches, where you are working on something independently. It's a way of cleaning up your history before you ask someone else to review your branch.
-
-::: caution
-
-If you have pushed your local branch to the remote, you will have to "force push" your branch to the remote, as the histories will no longer match. The command for this is "git push --force".
-
-BE AWARE that if anyone else has cloned your branch when you do this, any changes that they have made between when you last cloned the repo and when you make your force push will be entirely deleted!
-
-:::
-
-
 
 ::: challenge
 
 ## Exercise 1: Cleaning up history in a feature branch
 
-Looking at our history, we can probably tidy up our history even more. Squash the commits related to Pecan Pies into a single commit, and do the same for the Apple Pie commits. Reword the commit messages to better explain the updated commits.
+Clean up the history of your feature branch before the pull request/merge
+request is merged.
 
 :::: solution
+Follow the same steps we did earlier in the lesson:
 
+1. Check your branch history:
+  ```bash
+  git log --oneline
+  ```
+  ```output
+   7c77bba (HEAD -> pie-recipes) Complete pecan pie recipe instructions
+   f203cce Additional instructions to pecan pie recipe
+   c65036e Fix typo in ingredients
+   8613dde Add recipe for Pecan Pie with ingredients
+   3f40052 Add Apple Pie recipe
+   9761864 Initial commit with recipe files
+```
+
+2. Start an interactive rebase for the last 4 commits:
+  ```bash
+    git rebase -i HEAD~4
+  ```
+3. In the editor, squash the typo fix into the first commit:
+  ```bash
+    pick 8613dde Add recipe for Pecan Pie with ingredients
+    fixup c65036e Fix typo in ingredients
+    pick f203cce Additional instructions to pecan pie recipe
+    pick 7c77bba Complete pecan pie recipe instructions
+  ```
+
+4. Save and exit. Verify the new history:
+  ```bash
+    git log --oneline
+  ```
+
+  ```output
+    a03a64c (HEAD -> pie-recipes) Complete pecan pie recipe instructions
+    6c4a44a Additional instructions to pecan pie recipe
+    cf155bb Add recipe for Pecan Pie with ingredients
+    3f40052 Add Apple Pie recipe
+    9761864 Initial commit with recipe files
+  ```
+
+5. Force-push the cleaned branch:
+  ```bash
+    git push --force origin pie-recipes
+  ```
 ::::
 :::
 

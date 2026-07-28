@@ -49,11 +49,11 @@ large files, instead they are stored separately and only referenced in the Git d
 model. During push and pull operations, large files are transmitted separately -
 requiring the server to support this operation.
 
-For the sake of demonstration, we create a file called `cookbook.pdf`. We assume that it
+For the sake of demonstration, we create a file called `report.pdf`. We assume that it
 is a large, binary file in order to show how to handle it with `git lfs`:
 
 ```bash
-echo "This is a PDF of all of our recipes." > cookbook.pdf
+echo "This is a very large report." > report.pdf
 ```
 
 First, we need to install LFS. This is something that should only be done once per machine.
@@ -65,11 +65,11 @@ git lfs install
 Next, we tell Git, that this file should be treated with LFS:
 
 ```bash
-git lfs track cookbook.pdf
+git lfs track report.pdf
 ```
 
-```output
-Tracking "cookbook.pdf"
+```
+Tracking "report.pdf"
 ```
 
 Having done so, we can inspect the repository and we learn that a new file `.gitattributes`
@@ -85,7 +85,7 @@ On branch main
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 	.gitattributes
-	cookbook.pdf
+	report.pdf
 ```
 
 ```bash
@@ -93,7 +93,7 @@ cat .gitattributes
 ```
 
 ```
-cookbook.pdf filter=lfs diff=lfs merge=lfs -text
+report.pdf filter=lfs diff=lfs merge=lfs -text
 ```
 
 Similar to `.gitignore` this file is part of the repository
@@ -108,7 +108,7 @@ git commit -m "Setup LFS tracking"
 Now, we are ready to add the large file to the repository the same way we would with any other file:
 
 ```bash
-git add cookbook.pdf
+git add report.pdf
 git commit -m "Add final report to the repository"
 ```
 
